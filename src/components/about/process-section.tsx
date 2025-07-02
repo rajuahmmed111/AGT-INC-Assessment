@@ -21,13 +21,13 @@ export default function ProcessSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
-        if (prev >= 6) {
+        if (prev >= 7) {
           // reset to the first step
           return 1;
         }
         return prev + 1;
       });
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
