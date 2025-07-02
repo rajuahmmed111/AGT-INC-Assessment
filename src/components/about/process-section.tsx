@@ -43,7 +43,7 @@ export default function ProcessSection() {
 
     if (status === "completed") {
       return (
-        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+        <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
           <Check className="w-5 h-5 text-white" />
         </div>
       );
@@ -58,7 +58,7 @@ export default function ProcessSection() {
     }
 
     return (
-      <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
+      <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
         <span className="text-white font-semibold text-sm">{stepId}</span>
       </div>
     );
@@ -68,7 +68,7 @@ export default function ProcessSection() {
     <section id="our-process" className="bg-white py-16 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-semibold text-purple-600 text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-semibold text-red-600 text-center mb-12">
           Our process
         </h2>
 
