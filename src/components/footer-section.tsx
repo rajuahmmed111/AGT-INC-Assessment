@@ -106,16 +106,19 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
-          <Image
-            src={bbb}
-            width={100}
-            height={100}
-            alt="bbb"
-            className="mb-4 md:mb-0"
-          />
           {/* Copyright */}
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            <div>&copy; {new Date().getFullYear()} All rights reserved</div>
+          <div className="flex  gap-5 text-gray-400 text-sm mb-4 md:mb-0">
+            <Image
+              src={bbb}
+              width={100}
+              height={100}
+              alt="bbb"
+              className="mb-4 md:mb-0"
+            />
+
+            <div className="flex items-center justify-center">
+              &copy; {new Date().getFullYear()} All rights reserved
+            </div>
           </div>
 
           {/* Social Media Icons */}

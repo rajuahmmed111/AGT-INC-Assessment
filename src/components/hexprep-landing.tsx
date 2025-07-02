@@ -116,6 +116,7 @@ export default function HexprepLanding() {
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/30"></div>
         </div>
 
+        {/* Main Content */}
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Main Heading */}
           <div className="mb-12 text-center">
@@ -180,7 +181,7 @@ export default function HexprepLanding() {
       </section>
 
       {/* Features Section */}
-      <section className="relative -mt-20 z-20">
+      <section className="relative z-20">
         {/* Modern Background for Features */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-50 to-white"></div>
@@ -197,7 +198,7 @@ export default function HexprepLanding() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-12 relative overflow-hidden">
+          <div className="bg-white/90 mt-10 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-12 relative overflow-hidden">
             {/* Section Header */}
             <div className="text-center mb-16 relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
