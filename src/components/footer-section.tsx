@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="bg-gray-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Logo Section */}
-        <div className="md:col-span-1">
+        <div className="md:col-span-1 ">
           <div className="flex items-center gap-2 mb-7">
             <Image
               className="rounded-md"
@@ -22,7 +22,8 @@ export default function Footer() {
               height={40}
               alt="Logo"
             />
-            <span className="text-xl font-semibold text-gray-800">Matthew</span>
+            <span className="text-xl font-semibold text-gray-800">Rapid Flow
+Fulfillment</span>
           </div>
         </div>
 
@@ -117,7 +118,7 @@ export default function Footer() {
             />
 
             <div className="flex items-center justify-center">
-              &copy; {new Date().getFullYear()} Matthew
+              &copy; {new Date().getFullYear()} Rapid Flow Fulfillment
             </div>
           </div>
 

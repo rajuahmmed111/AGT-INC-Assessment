@@ -78,7 +78,7 @@ export default function Navbar() {
             {/* Center: Navigation Links */}
             <div className="hidden md:flex items-center space-x-8 justify-center flex-1">
               <Link
-                href="/home"
+                href="/"
                 className="text-gray-900 hover:text-red-600 font-bold transition-all duration-300 relative group px-3 py-2"
               >
                 <span className="relative z-10">Home</span>
@@ -157,13 +157,13 @@ export default function Navbar() {
                 </DropdownMenu>
               </div>
 
-              <Link
+              {/* <Link
                 href="/"
                 className="text-gray-900 hover:text-red-600 font-bold transition-all duration-300 relative group px-3 py-2"
               >
                 <span className="relative z-10">Contact</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Link>
+              </Link> */}
 
               <Link
                 href="/faq"
@@ -256,12 +256,12 @@ export default function Navbar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link
+                {/* <Link
                   href="/"
                   className="text-gray-900 hover:text-red-600 font-medium transition-all duration-300 p-3 rounded-lg hover:bg-white/20"
                 >
                   Contact
-                </Link>
+                </Link> */}
 
                 <Link
                   href="/faq"
