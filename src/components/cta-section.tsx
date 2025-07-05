@@ -42,12 +42,7 @@ export default function CtaSection() {
             </span>
           </Button>
 
-          <Button
-            variant="outline"
-            className="bg-transparent border-2 border-white/20 hover:border-red-500 text-white hover:text-red-400 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
-          >
-            View Pricing
-          </Button>
+          
         </div>
       </div>
 

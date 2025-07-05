@@ -1,4 +1,4 @@
-import CtaSection from "@/components/cta-section";
+// import CtaSection from "@/components/cta-section";
 import Features from "@/components/features-section";
 import Footer from "@/components/footer-section";
 import Navbar from "@/components/navbar";
@@ -13,7 +13,7 @@ const HomePage = () => {
       <Register />
       <Features />
       <Testimonials />
-      <CtaSection />
+      {/* <CtaSection /> */}
       <Footer />
     </div>
   );
