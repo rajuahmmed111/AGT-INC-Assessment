@@ -58,126 +58,48 @@ export default function OurMissionSection() {
         <div className="absolute bottom-40 left-32 w-48 h-48 bg-white rounded-full opacity-5 blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      {/* New Split Layout Structure */}
-      <div className="max-w-7xl mx-auto relative z-10 h-full flex items-center">
-        <div className="grid lg:grid-cols-2 gap-20 items-center w-full">
-          {/* Left Side - Large Mission Statement */}
-          <div className="space-y-8">
-            <div
-              className={`transition-all duration-1000 transform ${
-                isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
-              }`}
-            >
-              <h2 className="text-6xl lg:text-8xl font-black text-white leading-none mb-8">
-                Our
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                  Mission
-                </span>
-              </h2>
-            </div>
-
-            <div
-              className={`transition-all duration-1000 delay-300 transform ${
-                isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
-              }`}
-            >
-              <p className="text-2xl text-white leading-relaxed">
-                At{" "}
-                <span className="text-red-400 font-bold">
-                  Rapid Flow Fulfillment
-                </span>
-                , our mission is simple: to deliver the kind of prep and
-                logistics service we always wished we had as sellers. After
-                years of navigating unreliable, slow, and overpriced fulfillment
-                centers while running our own e-commerce business, we realized
-                the industry needed a serious upgrade. That’s why we built Rapid
-                Flow — a fulfillment solution created by sellers, for sellers.
-                We’re here to bring speed, transparency, and true partnership
-                back to the 3PL experience. Our goal is to help e-commerce
-                brands grow by handling their backend operations with the same
-                care and urgency we gave our own.
-              </p>
-            </div>
-
-            <div
-              className={`transition-all duration-1000 delay-500 transform ${
-                isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
-              }`}
-            >
-              {/* <button className="group relative px-10 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-all duration-300 hover:from-red-600 hover:to-red-700 hover:scale-105 hover:shadow-xl hover:shadow-red-500/25">
-                <span className="relative z-10">Learn More</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              </button> */}
-            </div>
+      {/* Content Section - Left Only */}
+      <div className="max-w-4xl mx-auto relative z-10 h-full flex items-center">
+        <div className="space-y-8">
+          <div
+            className={`transition-all duration-1000 transform ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
+            }`}
+          >
+            <h2 className="text-6xl lg:text-8xl font-black text-white leading-none mb-8">
+              Our
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
+                Mission
+              </span>
+            </h2>
           </div>
 
-          {/* Right Side - Values Stack */}
-          <div className="space-y-6">
-            <div
-              className={`transition-all duration-1000 delay-700 transform ${
-                isVisible
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
-              }`}
-            >
-              {/* Fast */}
-              <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 mb-6 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center">
-                    <span className="text-white font-black text-xl">F</span>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-black text-white mb-2">
-                      Fast Turnaround
-                    </h3>
-                    <p className="text-white/70">
-                      Quick processing and shipping times
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Reliable */}
-              <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 mb-6 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center">
-                    <span className="text-white font-black text-xl">R</span>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-black text-white mb-2">
-                      Reliable Service
-                    </h3>
-                    <p className="text-white/70">
-                      Consistent quality and communication
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experienced */}
-              <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center">
-                    <span className="text-white font-black text-xl">E</span>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-black text-white mb-2">
-                      Expert Knowledge
-                    </h3>
-                    <p className="text-white/70">
-                      Amazon sellers helping Amazon sellers
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div
+            className={`transition-all duration-1000 delay-300 transform ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
+            }`}
+          >
+            <p className="text-2xl text-white leading-relaxed">
+              At{" "}
+              <span className="text-red-400 font-bold">
+                Rapid Flow Fulfillment
+              </span>
+              , our mission is simple: to deliver the kind of prep and logistics
+              service we always wished we had as sellers. After years of
+              navigating unreliable, slow, and overpriced fulfillment centers
+              while running our own e-commerce business, we realized the
+              industry needed a serious upgrade. That’s why we built Rapid Flow
+              — a fulfillment solution created by sellers, for sellers. We’re
+              here to bring speed, transparency, and true partnership back to
+              the 3PL experience. Our goal is to help e-commerce brands grow by
+              handling their backend operations with the same care and urgency
+              we gave our own.
+            </p>
           </div>
         </div>
       </div>

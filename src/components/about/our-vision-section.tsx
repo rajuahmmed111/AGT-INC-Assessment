@@ -11,7 +11,6 @@ import {
   TrendingUp,
   Zap,
   Star,
-  ArrowRight,
 } from "lucide-react";
 
 export default function OurVisionSection() {
@@ -367,13 +366,7 @@ export default function OurVisionSection() {
                 </div>
               </div>
 
-              <button className="group relative px-12 py-6 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-xl rounded-2xl overflow-hidden transition-all duration-300 hover:from-red-600 hover:to-red-700 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50">
-                <span className="relative z-10 flex items-center gap-3">
-                  Join Our Vision
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              </button>
+             
             </div>
 
             {/* Right Side - Vision Points Carousel */}

@@ -24,8 +24,8 @@ import {
   Loader2,
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import Image from "next/image";
-import logo from "@/assets/logos.png";
+// import Image from "next/image";
+// import logo from "@/assets/logos.png";
 import { submitQuoteRequest, type QuoteFormData } from "@/lib/quote-actions";
 
 export default function Register() {
@@ -172,10 +172,11 @@ export default function Register() {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10 mt-14">
         {/* Enhanced Logo Section */}
         <div className="mb-12 text-center relative">
-          <div className="inline-block relative">
+          {/* logo */}
+          {/* <div className="inline-block relative">
             <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 blur-2xl rounded-full animate-pulse"></div>
             <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-white/30">
               <Image
@@ -186,7 +187,7 @@ export default function Register() {
                 alt="Rapid Flow Fulfillment Services Logo"
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-start">
@@ -253,7 +254,7 @@ export default function Register() {
                 size="lg"
                 className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold px-12 py-6 rounded-2xl transition-all shadow-2xl hover:shadow-red-500/50 hover:scale-110 border border-red-400/50 text-lg group"
               >
-                Get Started Today!
+                +
                 <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>

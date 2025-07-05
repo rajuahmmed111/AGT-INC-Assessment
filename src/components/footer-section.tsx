@@ -13,17 +13,22 @@ export default function Footer() {
     <footer className="bg-gray-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Logo Section */}
-        <div className="md:col-span-1">
-          <div className="flex flex-col items-start mb-7">
-            <Image
-              className="rounded-md mb-2"
-              src={logo}
-              width={40}
-              height={40}
-              alt="Logo"
-            />
+        <div className="md:col-span-1 mb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Image
+                className="rounded-md"
+                src={logo}
+                width={40}
+                height={40}
+                alt="Logo"
+              />
+              <span className="text-xl font-semibold text-gray-800">
+                Rapid Flow Fulfillment
+              </span>
+            </div>
             <span className="text-sm italic text-gray-700">
-              Effortless Fulfillment
+              Effortless Fulfillment. Every Time.
             </span>
           </div>
         </div>
@@ -79,6 +84,14 @@ export default function Footer() {
                   className="hover:text-red-500 transition-colors font-medium"
                 >
                   FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="about"
+                  className="hover:text-red-500 transition-colors font-medium"
+                >
+                  About RFF
                 </a>
               </li>
             </ul>

@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronDown,
-  Menu,
-  X,
-  Settings,
-  Target,
-  Brain,
-  Sparkles,
-} from "lucide-react";
+import { ChevronDown, Menu, X, Settings, Target, Brain } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +12,7 @@ import {
 import Link from "next/link";
 import ContactModal from "./common/ContactModal";
 import Image from "next/image";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logoff.png";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,6 +64,7 @@ export default function Navbar() {
                   />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
+                <p className="text-lg font-bold text-gray-900">Rapid Flow Fulfillment</p>
               </div>
             </div>
 
@@ -196,7 +189,6 @@ export default function Navbar() {
                 className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-red-500/25 hover:scale-105 border border-red-400/50 relative overflow-hidden group"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
                   Get in touch
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -297,7 +289,6 @@ export default function Navbar() {
                     className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-red-500/25 border border-red-400/50 relative overflow-hidden group"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      <Sparkles className="w-4 h-4" />
                       Get in touch
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

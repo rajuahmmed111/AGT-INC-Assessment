@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronDown, ChevronUp, Search, HelpCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import ContactModal from "./common/ContactModal";
+// import { Button } from "@/components/ui/button";
+// import ContactModal from "./common/ContactModal";
 
 export default function Faq() {
   const [searchTerm, setSearchTerm] = useState("");
   const [openItems, setOpenItems] = useState<number[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const faqData = [
     {
@@ -258,20 +258,11 @@ export default function Faq() {
             >
               Contact Us
             </a>
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              className="border-2 border-red-500 bg-transparent text-red-400 hover:bg-red-500 hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-            >
-              Email Support
-            </Button>
+            
           </div>
         </div>
 
-        {/* Contact Modal */}
-        <ContactModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+      
       </section>
 
       <style jsx>{`
