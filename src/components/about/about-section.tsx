@@ -169,20 +169,20 @@ export default function AboutSection() {
                 <span className="text-red-400 font-bold">
                   Rapid Flow Fulfillment
                 </span>
-                , we pride ourselves on being a reliable and efficient partner
-                for Amazon FBA sellers, resellers, and businesses in need of
-                shipping support.
+                ,we’re not just another prep center — we’re former 7-figure
+                Amazon sellers who know exactly what it’s like to be on your
+                side of the business. After years of scaling our own e-commerce
+                brands and dealing with slow, overpriced, and unreliable
+                fulfillment centers, we decided to build the solution we always
+                needed
               </p>
 
               <p className="text-lg text-gray-400 leading-relaxed">
-                We offer quick turnaround times, excellent communication, and
-                competitive rates to ensure your products are prepped and
-                shipped seamlessly. Whether you&apos;re looking to streamline
-                your FBA prep or need assistance with shipping logistics,{" "}
-                <span className="text-red-400 font-bold">
-                  Rapid Flow Fulfillment
-                </span>{" "}
-                is here to help your business succeed.
+                Based in New Jersey, Rapid Flow Fulfillment was created to bring
+                true hands-on, seller-first service to the logistics world.
+                We’ve lived the pain of delayed shipments, missed FBA windows,
+                and outsourced customer service — and we’re here to make sure
+                you don’t have to.
               </p>
             </div>
 
