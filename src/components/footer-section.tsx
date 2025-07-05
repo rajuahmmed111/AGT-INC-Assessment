@@ -148,7 +148,7 @@ export default function Footer() {
           {/* Social Media Icons */}
           <div className="flex items-center gap-4">
             <span className="text-sm italic text-gray-700">
-              Effortless Fulfillment. Every Time.f
+              Effortless Fulfillment. Every Time.
             </span>
             <a
               href="https://www.instagram.com/rapidflowfulfillment/profilecard/?igsh=aHZ3N2UzNHM1czR5"
