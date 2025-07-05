@@ -4,7 +4,7 @@ import { SiTiktok } from "react-icons/si";
 <SiTiktok className="w-5 h-5" />;
 
 import Image from "next/image";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logoff.png";
 import Link from "next/link";
 import bbb from "@/assets/bbb.jpeg";
 
