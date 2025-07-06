@@ -261,7 +261,7 @@ export default function Register() {
           </div>
 
           {/* Enhanced Form - 2 columns */}
-          <div className="lg:col-span-2">
+          <div id="quote-form" className="lg:col-span-2">
             <div className="sticky top-8">
               <Card className="bg-white/95 backdrop-blur-xl shadow-2xl border-0 overflow-hidden rounded-3xl">
                 <CardHeader className="pb-6 bg-gradient-to-r from-red-500 to-red-600 text-white relative">

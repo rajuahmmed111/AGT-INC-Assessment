@@ -1,10 +1,18 @@
-"use client"
+"use client";
 
-import { Quote, Star, ArrowLeft, ArrowRight, Users, Award, TrendingUp } from "lucide-react"
-import { useState } from "react"
+import {
+  Quote,
+  Star,
+  ArrowLeft,
+  ArrowRight,
+  Users,
+  Award,
+  TrendingUp,
+} from "lucide-react";
+import { useState } from "react";
 
 export default function Testimonials() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const testimonials = [
     {
@@ -52,15 +60,17 @@ export default function Testimonials() {
       location: "Oregon",
       orderVolume: "1500+",
     },
-  ]
+  ];
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length)
-  }
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+    setCurrentSlide(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black overflow-hidden">
@@ -83,7 +93,9 @@ export default function Testimonials() {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 bg-red-500/10 backdrop-blur-sm px-6 py-3 rounded-full border border-red-500/20 mb-8">
             <Award className="w-5 h-5 text-red-400" />
-            <span className="text-red-300 font-medium">Customer Success Stories</span>
+            <span className="text-red-300 font-medium">
+              Customer Success Stories
+            </span>
           </div>
 
           <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-6 leading-tight">
@@ -95,7 +107,8 @@ export default function Testimonials() {
           </h2>
 
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Join thousands of successful businesses who have transformed their operations with our solutions
+            Join thousands of successful businesses who have transformed their
+            operations with our solutions
           </p>
         </div>
 
@@ -150,7 +163,10 @@ export default function Testimonials() {
                   </div>
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="w-6 h-6 fill-yellow-400 text-yellow-400"
+                      />
                     ))}
                   </div>
                 </div>
@@ -161,11 +177,17 @@ export default function Testimonials() {
 
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">{testimonials[currentSlide].name.charAt(0)}</span>
+                    <span className="text-white font-bold text-xl">
+                      {testimonials[currentSlide].name.charAt(0)}
+                    </span>
                   </div>
                   <div>
-                    <div className="text-xl font-bold text-white">{testimonials[currentSlide].name}</div>
-                    <div className="text-gray-400">{testimonials[currentSlide].title}</div>
+                    <div className="text-xl font-bold text-white">
+                      {testimonials[currentSlide].name}
+                    </div>
+                    <div className="text-gray-400">
+                      {testimonials[currentSlide].title}
+                    </div>
                     <div className="flex items-center gap-4 mt-2">
                       <span className="text-sm text-red-400 bg-red-500/10 px-3 py-1 rounded-full">
                         📍 {testimonials[currentSlide].location}
@@ -182,8 +204,12 @@ export default function Testimonials() {
               <div className="relative">
                 <div className="w-full h-80 bg-gradient-to-br from-red-500/20 to-purple-500/20 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl font-black text-white/20 mb-4">{currentSlide + 1}</div>
-                    <div className="text-white/60">of {testimonials.length} stories</div>
+                    <div className="text-6xl font-black text-white/20 mb-4">
+                      {currentSlide + 1}
+                    </div>
+                    <div className="text-white/60">
+                      of {testimonials.length} stories
+                    </div>
                   </div>
                 </div>
 
@@ -212,7 +238,9 @@ export default function Testimonials() {
                     key={index}
                     onClick={() => setCurrentSlide(index)}
                     className={`w-3 h-3 rounded-full transition-all ${
-                      index === currentSlide ? "bg-red-500 w-8" : "bg-white/30 hover:bg-white/50"
+                      index === currentSlide
+                        ? "bg-red-500 w-8"
+                        : "bg-white/30 hover:bg-white/50"
                     }`}
                   />
                 ))}
@@ -244,21 +272,34 @@ export default function Testimonials() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                      />
                     ))}
                   </div>
                   <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{testimonial.name.charAt(0)}</span>
+                    <span className="text-white font-bold text-sm">
+                      {testimonial.name.charAt(0)}
+                    </span>
                   </div>
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 line-clamp-4">&quot;{testimonial.text}&quot;</p>
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 line-clamp-4">
+                  &quot;{testimonial.text}&quot;
+                </p>
 
                 <div className="space-y-2">
-                  <div className="font-semibold text-white text-sm">{testimonial.name}</div>
-                  <div className="text-xs text-gray-400">{testimonial.title}</div>
+                  <div className="font-semibold text-white text-sm">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    {testimonial.title}
+                  </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">{testimonial.location}</span>
+                    <span className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">
+                      {testimonial.location}
+                    </span>
                     <span className="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
                       {testimonial.orderVolume}
                     </span>
@@ -275,16 +316,26 @@ export default function Testimonials() {
         {/* Call to Action */}
         <div className="text-center mt-20">
           <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-12 border border-white/20">
-            <h3 className="text-3xl font-bold text-white mb-4">Ready to join our success stories?</h3>
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Ready to join our success stories?
+            </h3>
             <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-              Experience the same level of service and results that our clients rave about
+              Experience the same level of service and results that our clients
+              rave about
             </p>
-            {/* <button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105">
+            <button
+              onClick={() => {
+                document.getElementById("quote-form")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
+            >
               Get Started Today
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
