@@ -25,10 +25,10 @@ export default function Testimonials() {
   const [playingCardVideo, setPlayingCardVideo] = useState<number | null>(null);
   // Initialize all videos as muted to comply with browser autoplay policies
   const [mutedVideos, setMutedVideos] = useState<Set<number>>(
-    new Set([1, 2, 4, 5])
+    new Set([1, 2, 3, 4, 5])
   );
   const [mutedCardVideos, setMutedCardVideos] = useState<Set<number>>(
-    new Set([1, 2, 4, 5])
+    new Set([1, 2, 3, 4, 5])
   );
 
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
@@ -70,7 +70,9 @@ export default function Testimonials() {
       rating: 5,
       location: "Texas",
       orderVolume: "750+",
-      hasVideo: false,
+      videoUrl: reviewVideo,
+      thumbnailUrl: "/placeholder.svg?height=200&width=300",
+      hasVideo: true,
     },
     {
       id: 4,
