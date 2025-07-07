@@ -1,10 +1,9 @@
-// import CtaSection from "@/components/cta-section";
 import Features from "@/components/features-section";
 import Footer from "@/components/footer-section";
 import Navbar from "@/components/navbar";
 import Register from "@/components/register";
-import Testimonials from "@/components/testimonials-section";
-import React from "react";
+// import Testimonials from "@/components/testimonials-section";
+// import CtaSection from "@/components/cta-section";
 
 const HomePage = () => {
   return (
@@ -12,7 +11,7 @@ const HomePage = () => {
       <Navbar />
       <Register />
       <Features />
-      <Testimonials />
+      {/* <Testimonials /> */}
       {/* <CtaSection /> */}
       <Footer />
     </div>

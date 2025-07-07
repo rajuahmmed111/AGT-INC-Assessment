@@ -64,7 +64,9 @@ export default function Navbar() {
                   />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <p className="text-lg font-bold text-gray-900">Rapid Flow Fulfillment</p>
+                <p className="text-lg font-bold text-gray-900">
+                  Rapid Flow Fulfillment
+                </p>
               </div>
             </div>
 
@@ -165,10 +167,17 @@ export default function Navbar() {
               </Link> */}
 
               <Link
+                href="/testimonial"
+                className="text-gray-900 hover:text-red-600 font-bold transition-all duration-300 relative group px-3 py-2"
+              >
+                <span className="relative z-10">Testimonial</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
+              <Link
                 href="/faq"
                 className="text-gray-900 hover:text-red-600 font-bold transition-all duration-300 relative group px-3 py-2"
               >
-                <span className="relative z-10">FAQ</span>
+                <span className="relative z-10">Faq</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </div>
@@ -264,6 +273,12 @@ export default function Navbar() {
                   Contact
                 </Link> */}
 
+                <Link
+                  href="/testimonial"
+                  className="text-gray-900 hover:text-red-600 font-medium transition-all duration-300 p-3 rounded-lg hover:bg-white/20"
+                >
+                  Testimonial
+                </Link>
                 <Link
                   href="/faq"
                   className="text-gray-900 hover:text-red-600 font-medium transition-all duration-300 p-3 rounded-lg hover:bg-white/20"

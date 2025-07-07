@@ -47,7 +47,7 @@ export default function Footer() {
                     href="about"
                     className="hover:text-red-500 transition-colors font-medium"
                   >
-                    About RFF
+                    About
                   </a>
                 </li>
               </ul>
@@ -97,7 +97,16 @@ export default function Footer() {
                   href="faq"
                   className="hover:text-red-500 transition-colors font-medium"
                 >
-                  FAQ
+                  Faq
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="testimonial"
+                  className="hover:text-red-500 transition-colors font-medium"
+                >
+                  Testimonial
                 </a>
               </li>
             </ul>
