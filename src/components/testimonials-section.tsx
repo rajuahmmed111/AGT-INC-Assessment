@@ -42,60 +42,40 @@ export default function Testimonials() {
       id: 1,
       text: "Pallet went in and out in one day with HexPrep's Chicago warehouse! Phenomenal rates and Khai was able to quickly report issues with how the supplier sent the goods. Will continue to work with these gentlemen for the foreseeable future.",
       name: "Morgan",
-      title: "FBA & FBM | HexPrep Member",
       rating: 5,
-      location: "Chicago",
-      orderVolume: "500+",
       videoUrl: reviewVideo,
-      thumbnailUrl: "/placeholder.svg?height=200&width=300",
       hasVideo: true,
     },
     {
       id: 2,
       text: "So far the staff at Hex-Prep have been beyond helpful and friendly! They're quick to respond to any of my questions or concerns about my orders and the turnaround time for my FBM shipments is crazy fast.",
       name: "Quinn",
-      title: "FBA | HexPrep Member",
       rating: 5,
-      location: "Oregon",
-      orderVolume: "1000+",
       videoUrl: reviewVideo,
-      thumbnailUrl: "/placeholder.svg?height=200&width=300",
       hasVideo: true,
     },
     {
       id: 3,
       text: "Great communication and fast turnaround time. One of the best smaller prep centers I've worked with! I had no issues and will continue working with these guys again!",
       name: "Brody",
-      title: "FBA & FBM | HexPrep Member",
       rating: 5,
-      location: "Texas",
-      orderVolume: "750+",
       videoUrl: reviewVideo,
-      thumbnailUrl: "/placeholder.svg?height=200&width=300",
       hasVideo: true,
     },
     {
       id: 4,
       text: "HexPrep has been a game changer for my Amazon business. Their clear communication keeps me informed every step of the way. I highly recommend HexPrep to any seller looking for reliable and efficient prep services!",
       name: "Hector",
-      title: "FBM | HexPrep Member",
       rating: 5,
-      location: "California",
-      orderVolume: "2000+",
       videoUrl: reviewVideo,
-      thumbnailUrl: "/placeholder.svg?height=200&width=300",
       hasVideo: true,
     },
     {
       id: 5,
       text: "Started using Hexprep about 2 months ago, the team has super quick communication and always makes a effort to make sure orders go out on time! Super helpful this Q4 pushing out all my orders.",
       name: "Henry",
-      title: "FBA & FBM | HexPrep Member",
       rating: 5,
-      location: "Oregon",
-      orderVolume: "1500+",
       videoUrl: reviewVideo,
-      thumbnailUrl: "/placeholder.svg?height=200&width=300",
       hasVideo: true,
     },
   ];
@@ -435,17 +415,6 @@ export default function Testimonials() {
                     <div className="text-xl font-bold text-white">
                       {testimonials[currentSlide].name}
                     </div>
-                    <div className="text-gray-400">
-                      {testimonials[currentSlide].title}
-                    </div>
-                    <div className="flex items-center gap-4 mt-2">
-                      <span className="text-sm text-red-400 bg-red-500/10 px-3 py-1 rounded-full">
-                        📍 {testimonials[currentSlide].location}
-                      </span>
-                      <span className="text-sm text-green-400 bg-green-500/10 px-3 py-1 rounded-full">
-                        📦 {testimonials[currentSlide].orderVolume} orders/month
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -460,7 +429,6 @@ export default function Testimonials() {
                           videoRefs.current[testimonials[currentSlide].id] = el;
                       }}
                       className="w-full h-full object-cover"
-                      poster={testimonials[currentSlide].thumbnailUrl}
                       muted={mutedVideos.has(testimonials[currentSlide].id)}
                       playsInline
                       preload="metadata"
@@ -568,7 +536,6 @@ export default function Testimonials() {
                         if (el) cardVideoRefs.current[testimonial.id] = el;
                       }}
                       className="w-full h-full object-cover"
-                      poster={testimonial.thumbnailUrl}
                       muted={mutedCardVideos.has(testimonial.id)}
                       playsInline
                       preload="metadata"
@@ -632,17 +599,6 @@ export default function Testimonials() {
                       <div className="font-semibold text-white text-sm">
                         {testimonial.name}
                       </div>
-                      <div className="text-xs text-gray-400">
-                        {testimonial.title}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">
-                          {testimonial.location}
-                        </span>
-                        <span className="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
-                          {testimonial.orderVolume}
-                        </span>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -672,17 +628,6 @@ export default function Testimonials() {
                   <div className="space-y-2">
                     <div className="font-semibold text-white text-sm">
                       {testimonial.name}
-                    </div>
-                    <div className="text-xs text-gray-400">
-                      {testimonial.title}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">
-                        {testimonial.location}
-                      </span>
-                      <span className="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
-                        {testimonial.orderVolume}
-                      </span>
                     </div>
                   </div>
                 </div>
