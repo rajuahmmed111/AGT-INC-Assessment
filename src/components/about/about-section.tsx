@@ -219,10 +219,10 @@ export default function AboutSection() {
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
-                        Fast
+                        Reliability
                       </div>
                       <div className="text-gray-400">
-                        Quick Turnaround Times
+                        We deliver what we promise, always or your money back.
                       </div>
                     </div>
                   </div>
@@ -236,10 +236,10 @@ export default function AboutSection() {
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
-                        Reliable
+                        Flexible Pricing
                       </div>
                       <div className="text-gray-400">
-                        Excellent Communication
+                        Pricing that helps you scale.
                       </div>
                     </div>
                   </div>
@@ -253,9 +253,11 @@ export default function AboutSection() {
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
-                        Affordable
+                        Flexible Solutions
                       </div>
-                      <div className="text-gray-400">Competitive Rates</div>
+                      <div className="text-gray-400">
+                        Business designed to fit your needs.
+                      </div>
                     </div>
                   </div>
                 </div>
