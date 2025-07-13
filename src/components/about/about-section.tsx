@@ -215,7 +215,7 @@ export default function AboutSection() {
                 <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-red-500/20">
                   <div className="flex items-center gap-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center">
-                      <div className="text-2xl font-black text-white">F</div>
+                      <div className="text-2xl font-black text-white">R</div>
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
@@ -232,7 +232,7 @@ export default function AboutSection() {
                 <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-red-500/20">
                   <div className="flex items-center gap-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center">
-                      <div className="text-2xl font-black text-white">R</div>
+                      <div className="text-2xl font-black text-white">F</div>
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
@@ -249,7 +249,7 @@ export default function AboutSection() {
                 <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-red-500/20">
                   <div className="flex items-center gap-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center">
-                      <div className="text-2xl font-black text-white">A</div>
+                      <div className="text-2xl font-black text-white">F</div>
                     </div>
                     <div>
                       <div className="text-2xl font-black text-white mb-1">
