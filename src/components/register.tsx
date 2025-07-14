@@ -204,8 +204,10 @@ export default function Register() {
               </h1>
 
               <p className="text-2xl text-gray-300 leading-relaxed font-light max-w-3xl">
-                Expert solutions in web development, design, and digital
-                consulting services that drive real results for your business.
+                Leveraging years of logistics expertise and our own 7-figure
+                seller journey, Rapid Flow Fulfillment delivers fulfillment
+                solutions built for your business to scale smoothly and
+                confidently.
               </p>
             </div>
 
@@ -214,7 +216,7 @@ export default function Register() {
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
                 <div className="text-center">
                   <Trophy className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">500+</div>
+                  <div className="text-3xl font-bold text-white mb-1">32000+</div>
                   <div className="text-sm text-gray-300">Projects</div>
                 </div>
               </div>
@@ -222,15 +224,15 @@ export default function Register() {
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
                 <div className="text-center">
                   <Users className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">98%</div>
-                  <div className="text-sm text-gray-300">Satisfaction</div>
+                  <div className="text-3xl font-bold text-white mb-1">100%</div>
+                  <div className="text-sm text-gray-300">Satisfied clients</div>
                 </div>
               </div>
 
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
                 <div className="text-center">
                   <Star className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">5+</div>
+                  <div className="text-3xl font-bold text-white mb-1">3+</div>
                   <div className="text-sm text-gray-300">Years</div>
                 </div>
               </div>
@@ -238,7 +240,7 @@ export default function Register() {
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
                 <div className="text-center">
                   <Clock className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">24h</div>
+                  <div className="text-3xl font-bold text-white mb-1">24/7</div>
                   <div className="text-sm text-gray-300">Response</div>
                 </div>
               </div>
@@ -247,8 +249,9 @@ export default function Register() {
             {/* Call to Action */}
             <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 text-center">
               <p className="text-xl text-gray-200 mb-6 leading-relaxed">
-                Let Rapid Flow Fulfillment handle the technical complexities so
-                you can focus on your core business objectives.
+                {/* Let Rapid Flow Fulfillment handle the technical complexities so
+                you can focus on your core business objectives. */}
+                 Leave the logistics to Rapid Flow Fulfillment, and concentrate on what matters most—growing your business.
               </p>
               {/* <Button
                 size="lg"

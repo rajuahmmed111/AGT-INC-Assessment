@@ -9,7 +9,7 @@ import {
   Users,
   Sparkles,
   Crown,
-  Flame,
+  // Flame,
 } from "lucide-react";
 import Link from "next/link";
 import ContactModal from "./common/ContactModal";
@@ -31,19 +31,19 @@ export default function Features() {
           <div className="inline-flex items-center gap-3 mb-6 bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-sm px-8 py-4 rounded-full border border-red-200 shadow-xl">
             <Sparkles className="w-6 h-6 text-red-600 animate-pulse" />
             <span className="text-red-600 font-bold text-xl">
-              Premium Excellence
+              Premium Fulfillment
             </span>
-            <Crown className="w-6 h-6 text-red-600 animate-bounce" />
+            {/* <Crown className="w-6 h-6 text-red-600 animate-bounce" /> */}
           </div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-tight">
+          {/* <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-tight">
             {home?.title?.split(" ").slice(0, -1).join(" ")}{" "}
             <span className="text-red-600 relative inline-block">
               {home?.title?.split(" ").slice(-1)}
               <div className="absolute -bottom-3 left-0 right-0 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
               <Flame className="absolute -top-2 -right-2 w-8 h-8 text-red-500 animate-bounce" />
             </span>
-          </h2>
+          </h2> */}
 
           <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {home?.description}
