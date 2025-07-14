@@ -72,13 +72,11 @@ export default function AboutSection() {
                   "At Rapid Flow Fulfillment, we’re not just another prep center — we’re former 7-figure Amazon sellers who know exactly what it’s like to be on your side of the business."}
               </p>
 
-              <p className="text-lg text-gray-400 leading-relaxed">
+              {/* <p className="text-xl text-gray-300 leading-relaxed">
                 Based in New Jersey, Rapid Flow Fulfillment was created to bring
                 true hands-on, seller-first service to the logistics world.
-                We’ve lived the pain of delayed shipments, missed FBA windows,
-                and outsourced customer service — and we’re here to make sure
-                you don’t have to.
-              </p>
+              
+              </p> */}
             </div>
           </div>
 

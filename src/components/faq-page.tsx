@@ -168,10 +168,10 @@ export default function Faq() {
           <h2 className="text-3xl font-bold text-white mb-4">
             Still have questions?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          {/* <p className="text-xl text-gray-300 mb-8">
             Can&apos;t find what you&apos;re looking for? Our team is here to
             help.
-          </p>
+          </p> */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               onClick={() => setIsModalOpen(true)}
