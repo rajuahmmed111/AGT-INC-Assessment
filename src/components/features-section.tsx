@@ -7,9 +7,8 @@ import {
   Rocket,
   Globe,
   Users,
-  Sparkles,
   Crown,
-  // Flame,
+  Flame,
 } from "lucide-react";
 import Link from "next/link";
 import ContactModal from "./common/ContactModal";
@@ -29,21 +28,21 @@ export default function Features() {
         {/* Section Header */}
         <div className="text-center mb-20 relative">
           <div className="inline-flex items-center gap-3 mb-6 bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-sm px-8 py-4 rounded-full border border-red-200 shadow-xl">
-            <Sparkles className="w-6 h-6 text-red-600 animate-pulse" />
+            {/* <Sparkles className="w-6 h-6 text-red-600 animate-pulse" /> */}
             <span className="text-red-600 font-bold text-xl">
               Premium Fulfillment
             </span>
-            {/* <Crown className="w-6 h-6 text-red-600 animate-bounce" /> */}
+            <Crown className="w-6 h-6 text-red-600 animate-bounce" />
           </div>
 
-          {/* <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-tight">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-tight">
             {home?.title?.split(" ").slice(0, -1).join(" ")}{" "}
             <span className="text-red-600 relative inline-block">
               {home?.title?.split(" ").slice(-1)}
               <div className="absolute -bottom-3 left-0 right-0 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
               <Flame className="absolute -top-2 -right-2 w-8 h-8 text-red-500 animate-bounce" />
             </span>
-          </h2> */}
+          </h2>
 
           <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {home?.description}
@@ -174,18 +173,17 @@ export default function Features() {
               <div className="inline-flex items-center gap-3 mb-8 bg-red-600/20 backdrop-blur-sm px-8 py-4 rounded-full border border-red-500/30">
                 <Users className="w-6 h-6 text-red-400 animate-pulse" />
                 <span className="text-red-400 font-bold text-xl">
-                  Join 10,000+ Elite Sellers
+                  Join 100+ Elite Businesses
                 </span>
-                <Crown className="w-6 h-6 text-red-400 animate-bounce" />
+                {/* <Crown className="w-6 h-6 text-red-400 animate-bounce" /> */}
               </div>
 
               <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
-                {home?.subTitle}{" "}
-                <span className="text-red-500 relative">
-                  Ready to dominate with
-                  <div className="absolute -bottom-3 left-0 right-0 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
+                {home?.subTitle?.split(" ").slice(0, -2).join(" ")}{" "}
+                <span className="text-red-600 relative inline-block">
+                  {home?.subTitle?.split(" ").slice(-2).join(" ")}
+                  <div className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
                 </span>
-                ?
               </h3>
 
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto border border-white/20">

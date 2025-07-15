@@ -22,6 +22,7 @@ import {
   Trophy,
   Users,
   Loader2,
+  Handshake,
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 // import Image from "next/image";
@@ -621,7 +622,7 @@ export default function Register() {
                         <span>24h response</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Star className="w-4 h-4 text-yellow-500" />
+                        <Handshake  className="w-4 h-4 text-yellow-500" />
                         <span>No commitment</span>
                       </div>
                     </div>
