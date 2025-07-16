@@ -27,6 +27,7 @@ import {
   Loader2,
   Handshake,
   LucideCalendarCheck,
+  ShoppingBagIcon,
 } from "lucide-react";
 import { FaAmazon } from "react-icons/fa";
 import { TbBrandWalmart } from "react-icons/tb";
@@ -34,6 +35,7 @@ import { useToast } from "@/components/ui/use-toast";
 // import Image from "next/image";
 // import logo from "@/assets/logos.png";
 import { submitQuoteRequest, type QuoteFormData } from "@/lib/quote-actions";
+import { MdOutlinePrivateConnectivity } from "react-icons/md";
 
 export default function Register() {
   const { toast } = useToast();
@@ -568,7 +570,7 @@ export default function Register() {
                             <div className="flex items-center gap-2">
                               <div>
                                 {" "}
-                                <TbBrandWalmart />{" "}
+                                <MdOutlinePrivateConnectivity />{" "}
                               </div>
                               <div>Private Label</div>
                             </div>
@@ -580,7 +582,7 @@ export default function Register() {
                             <div className="flex items-center gap-2">
                               <div>
                                 {" "}
-                                <TbBrandWalmart />{" "}
+                                <ShoppingBagIcon className="w-6 h-6 text-black" />{" "}
                               </div>
                               <div>Retail</div>
                             </div>
