@@ -72,7 +72,7 @@ export default function OurMissionSection() {
                 : "-translate-x-10 opacity-0"
             }`}
           >
-            <h2 className="text-6xl lg:text-8xl font-black text-white leading-none mb-6">
+            <h2 className="text-4xl lg:text-6xl font-black text-white leading-none mb-6">
               {mission?.title?.split(" ")[0] || "Our"}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">

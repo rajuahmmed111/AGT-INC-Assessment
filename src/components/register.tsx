@@ -1,4 +1,3 @@
-
 "use client";
 
 import type React from "react";
@@ -238,12 +237,12 @@ export default function Register() {
             </div>
 
             {/* Call to Action */}
-            <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 text-center">
+            {/* <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 text-center">
               <p className="text-xl text-gray-200 mb-6 leading-relaxed">
                 Leave the logistics to Rapid Flow Fulfillment, and concentrate
                 on what matters most—growing your business.
               </p>
-            </div>
+            </div> */}
 
             {/* Bottom section with enhanced styling */}
             <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-xl rounded-2xl p-8 border border-red-400/30 text-center">

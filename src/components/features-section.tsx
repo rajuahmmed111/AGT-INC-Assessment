@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  Truck,
-  CheckCircle,
-  Rocket,
-  Globe,
-  Users,
-  Crown,
-} from "lucide-react";
-import Link from "next/link";
+import { Truck, CheckCircle, Rocket, Globe, Users, Crown } from "lucide-react";
+// import Link from "next/link";
 import ContactModal from "./common/ContactModal";
 import { useState } from "react";
 import { useGetHomesQuery } from "@/redux/api/homeApi";
+import { FaPlug } from "react-icons/fa";
 
 export default function Features() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -102,7 +96,7 @@ export default function Features() {
                   <div className="relative z-10 space-y-6">
                     <div className="flex items-center justify-between">
                       <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                        <Globe className="w-7 h-7 text-white" />
+                        <FaPlug className="w-7 h-7 text-white" />
                       </div>
                     </div>
 
@@ -176,9 +170,9 @@ export default function Features() {
               </div>
 
               <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
-                {home?.subTitle?.split(" ").slice(0, -2).join(" ")}{" "}
+                {home?.subTitle?.split(" ").slice(0, -3).join(" ")}{" "}
                 <span className="text-red-600 relative inline-block">
-                  {home?.subTitle?.split(" ").slice(-2).join(" ")}
+                  {home?.subTitle?.split(" ").slice(-3).join(" ")}
                   <div className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-red-500 to-red-600 rounded-full animate-pulse"></div>
                 </span>
               </h3>
@@ -218,14 +212,14 @@ export default function Features() {
               </div>
 
               <div className="mt-20">
-                <Link href="#">
+                {/* <Link href="#">
                   <button
                     onClick={() => setIsModalOpen(true)}
                     className="group bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold px-8 py-4 rounded-2xl text-xl transition-all duration-300 shadow-2xl hover:shadow-red-500/40 hover:scale-105 flex items-center gap-3 mx-auto"
                   >
                     <span>Get Started Today</span>
                   </button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

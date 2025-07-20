@@ -57,7 +57,7 @@ export default function OurVisionSection() {
       <div className="max-w-7xl mx-auto relative z-10 flex items-center min-h-screen">
         <div className="w-full">
           {/* Enhanced Header */}
-          <div className="text-center mb-32">
+          <div className="text-center mb-20">
             <div
               className={`transition-all duration-1000 transform ${
                 isVisible
@@ -72,7 +72,7 @@ export default function OurVisionSection() {
                 </span>
               </div>
 
-              <h2 className="text-7xl md:text-9xl font-black text-white mb-12 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-12 leading-tight">
                 Our{" "}
                 <span className="text-transparent bg-clip-text bg-red-600 drop-shadow-2xl ">
                   Services
@@ -86,7 +86,7 @@ export default function OurVisionSection() {
           </div>
 
           {/* Enhanced Vision Cards Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-32">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Our Vision Card */}
             <div
               className={`transition-all duration-1000 delay-300 transform ${
@@ -181,7 +181,7 @@ export default function OurVisionSection() {
           </div>
 
           {/* Enhanced Call-to-Action */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <div
               className={`transition-all duration-1000 delay-1100 transform ${
                 isVisible
@@ -194,7 +194,7 @@ export default function OurVisionSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

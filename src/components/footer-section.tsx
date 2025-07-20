@@ -6,7 +6,12 @@ import Link from "next/link";
 import bbb from "@/assets/bbb.jpeg";
 import { useEffect, useState } from "react";
 import { useGetContactQuery } from "@/redux/api/contactApi";
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 // Define proper TypeScript interfaces
 interface SocialMediaItem {
@@ -65,9 +70,6 @@ export default function Footer() {
 
   // Function to get the appropriate icon for social media platform
   const getSocialIcon = (name: string): JSX.Element => {
-
-
-  
     const platformName = name.toLowerCase();
     switch (platformName) {
       case "instragram":
@@ -139,9 +141,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-red-500 font-bold text-lg mb-4 border-b-2 border-red-100 pb-2">
-              About
-            </h3>
+            <Link href="about">
+              <h3 className="text-red-500 font-bold text-lg mb-4 border-b-2 border-red-100 pb-2">
+                About
+              </h3>
+            </Link>
             <nav>
               <ul className="space-y-3">
                 <li>
@@ -149,7 +153,7 @@ export default function Footer() {
                     href="/about#our-process"
                     className="text-gray-700 hover:text-red-500 transition-all duration-300 font-medium flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span> */}
                     Our Process
                   </Link>
                 </li>
@@ -158,7 +162,7 @@ export default function Footer() {
                     href="/about#our-vision"
                     className="text-gray-700 hover:text-red-500 transition-all duration-300 font-medium flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span> */}
                     Our Services
                   </Link>
                 </li>
@@ -167,7 +171,7 @@ export default function Footer() {
                     href="/about#our-mission"
                     className="text-gray-700 hover:text-red-500 transition-all duration-300 font-medium flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span> */}
                     Our Mission
                   </Link>
                 </li>
@@ -187,7 +191,7 @@ export default function Footer() {
                     href="/faq"
                     className="text-gray-700 hover:text-red-500 transition-all duration-300 font-medium flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span> */}
                     FAQ
                   </Link>
                 </li>
@@ -196,7 +200,7 @@ export default function Footer() {
                     href="/testimonial"
                     className="text-gray-700 hover:text-red-500 transition-all duration-300 font-medium flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-500 transition-colors"></span> */}
                     Testimonials
                   </Link>
                 </li>
@@ -212,8 +216,10 @@ export default function Footer() {
             <ul className="space-y-3">
               {contactData?.location && (
                 <li className="text-gray-700 flex items-start">
-                  <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  <span className="leading-relaxed">{contactData.location}</span>
+                  {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span> */}
+                  <span className="leading-relaxed">
+                    {contactData.location}
+                  </span>
                 </li>
               )}
               {contactData?.email && (
@@ -222,7 +228,7 @@ export default function Footer() {
                     href={`mailto:${contactData.email}?subject=Support&body=Hello`}
                     className="text-red-500 hover:text-red-600 transition-colors flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-600 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-600 transition-colors"></span> */}
                     {contactData.email}
                   </a>
                 </li>
@@ -230,11 +236,11 @@ export default function Footer() {
               {contactData?.phone && (
                 <li>
                   <a
-                    href={`tel:${contactData.phone.replace(/\D/g, '')}`}
+                    href={`tel:${contactData.phone.replace(/\D/g, "")}`}
                     onClick={handlePhoneClick}
                     className="text-red-500 hover:text-red-600 transition-colors flex items-center group"
                   >
-                    <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-600 transition-colors"></span>
+                    {/* <span className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3 group-hover:bg-red-600 transition-colors"></span> */}
                     {contactData.phone}
                   </a>
                 </li>
@@ -257,34 +263,37 @@ export default function Footer() {
             <div className="text-center md:text-left">
               Copyright &copy; {new Date().getFullYear()} Rapid Flow Fulfillment
               <br />
-              <span className="text-xs text-gray-400">All rights reserved</span>
+              {/* <span className="text-xs text-gray-400">All rights reserved</span> */}
             </div>
           </div>
 
           {/* Social Media Icons */}
           <div className="flex flex-col items-center md:items-end">
-            {contactData?.socialmedia && contactData?.socialmedia?.length > 0 && (
-              <div className="flex justify-center items-center gap-4 mb-3">
-                {contactData?.socialmedia?.map((item: SocialMediaItem, index: number) => (
-                  <a
-                    key={`${item.name}-${index}`}
-                    href={item?.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-                    aria-label={`Follow us on ${item.name}`}
-                  >
-                    <div className="text-gray-600 group-hover:text-red-500 transition-colors duration-300">
-                      {getSocialIcon(item.name)}
-                    </div>
-                    {/* Tooltip */}
-                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                      {item.name}
-                    </div>
-                  </a>
-                ))}
-              </div>
-            )}
+            {contactData?.socialmedia &&
+              contactData?.socialmedia?.length > 0 && (
+                <div className="flex justify-center items-center gap-4 mb-3">
+                  {contactData?.socialmedia?.map(
+                    (item: SocialMediaItem, index: number) => (
+                      <a
+                        key={`${item.name}-${index}`}
+                        href={item?.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
+                        aria-label={`Follow us on ${item.name}`}
+                      >
+                        <div className="text-gray-600 group-hover:text-red-500 transition-colors duration-300">
+                          {getSocialIcon(item.name)}
+                        </div>
+                        {/* Tooltip */}
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                          {item.name}
+                        </div>
+                      </a>
+                    )
+                  )}
+                </div>
+              )}
             <span className="text-sm italic text-gray-600 font-medium">
               Follow us for updates
             </span>
