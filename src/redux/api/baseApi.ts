@@ -21,6 +21,7 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     "Users",
+    "QuoteFormLeft",
     "Faqs",
     "Homes",
     "Fras",
