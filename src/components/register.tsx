@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import type React from "react";
@@ -35,6 +36,7 @@ import { TbBrandWalmart } from "react-icons/tb";
 import { useToast } from "@/components/ui/use-toast";
 import { submitQuoteRequest, type QuoteFormData } from "@/lib/quote-actions";
 import { MdOutlinePrivateConnectivity } from "react-icons/md";
+import { useGetQuoteLeftQuery } from "@/redux/api/quoteleftApi";
 
 export default function Register() {
   const { toast } = useToast();
@@ -47,8 +49,22 @@ export default function Register() {
     company: "",
     website: "",
     serviceType: "",
+    customService: "",
     budget: "",
   });
+
+  const { isLoading, data, error, isSuccess } = useGetQuoteLeftQuery({});
+  // console.log(data, "kljfk")
+
+  if (isLoading) {
+    return <p> loading page .....</p>;
+  }
+  if (error) {
+    console.log(error);
+  }
+
+  console.log(isSuccess);
+  console.log(data?.data);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -79,6 +95,7 @@ export default function Register() {
           company: "",
           website: "",
           serviceType: "",
+          customService: "",
           budget: "",
         });
       } else {
@@ -170,107 +187,135 @@ export default function Register() {
         </div>
       </div>
 
-      
-
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10 mt-14">
         <div className="grid lg:grid-cols-5 gap-8 items-start">
           {/* Left Content */}
-          <div className="lg:col-span-3 space-y-8">
-            {/* Hero Section */}
-            <div className="text-center lg:text-left space-y-8">
-              <h1 className="text-6xl lg:text-7xl font-black text-white leading-tight drop-shadow-2xl">
-                <span className=" decoration-red-400 decoration-4">Rapid Flow</span>
-                <br />
-                <span className="text-4xl lg:text-5xl text-red-400 decoration-red-400 decoration-4">
-                  Fulfillment
-                </span>
-              </h1>
+          {!isLoading &&
+            isSuccess &&
+            data?.data?.map((item: any, index: number) => (
+              <>
+                <div key={index + 1} className="lg:col-span-3 space-y-8">
+                  {/* Hero Section */}
+                  <div className="text-center lg:text-left space-y-8">
+                    <h1 className="text-6xl lg:text-7xl font-black text-white leading-tight drop-shadow-2xl">
+                      <span className=" decoration-red-400 decoration-4">
+                        {item?.title.split(" ")[0]} {item?.title.split(" ")[1]}
+                      </span>
+                      <br />
+                      <span className="text-4xl lg:text-5xl text-red-400 decoration-red-400 decoration-4">
+                        {item?.title.split(" ")[2]}
+                      </span>
+                    </h1>
 
-              <p className="text-2xl text-gray-300 leading-relaxed font-light max-w-3xl">
-                Leveraging years of logistics expertise and our own 7-figure
-                seller journey, Rapid Flow Fulfillment delivers fulfillment
-                solutions built for your business to scale smoothly and
-                confidently.
-              </p>
-            </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
-                <div className="text-center">
-                  <FiBox className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">
-                    32,000+
+                    <p className="text-2xl text-gray-300 leading-relaxed font-light max-w-3xl">
+                      {item?.description}
+                    </p>
                   </div>
-                  <div className="text-sm text-gray-300">Units Shipped</div>
-                </div>
-              </div>
 
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
-                <div className="text-center">
-                  <TbTruckDelivery className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">3+</div>
-                  <div className="text-sm text-gray-300">
-                    Years in Logistics
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
+                      <div className="text-center">
+                        <FiBox className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <div className="text-3xl font-bold text-white mb-1">
+                          {item?.units_shipped}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          {item?.units_shipped_title}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
+                      <div className="text-center">
+                        <TbTruckDelivery className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <div className="text-3xl font-bold text-white mb-1">
+                          {item?.years}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          {item?.years_title}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
+                      <div className="text-center">
+                        <Users className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <div className="text-3xl font-bold text-white mb-1">
+                          {item?.client_satisfied}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          {item?.client_satisfied_title}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
+                      <div className="text-center">
+                        <LucideCalendarCheck className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <div className="text-3xl font-bold text-white mb-1">
+                          {item?.week_day}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          {item?.week_day_title}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
-                <div className="text-center">
-                  <Users className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">100+</div>
-                  <div className="text-sm text-gray-300">Satisfied clients</div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-red-400/50 transition-all duration-500 hover:scale-105 group">
-                <div className="text-center">
-                  <LucideCalendarCheck className="w-8 h-8 text-red-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-white mb-1">7</div>
-                  <div className="text-sm text-gray-300">
-                    days a week operations
+                  {/* Call to Action */}
+                  <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 text-center">
+                    <p className="text-xl text-gray-200 mb-6 leading-relaxed">
+                      {item?.para}
+                 
+                    </p>
+                    <div className="flex justify-center items-center gap-4 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span> {item?.support}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span>{item?.solutions}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span>{item?.team}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Call to Action */}
-            {/* <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/20 text-center">
-              <p className="text-xl text-gray-200 mb-6 leading-relaxed">
-                Leave the logistics to Rapid Flow Fulfillment, and concentrate
-                on what matters most—growing your business.
-              </p>
-            </div> */}
-
-            {/* Bottom section with enhanced styling */}
-            <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-xl rounded-2xl p-8 border border-red-400/30 text-center">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Sparkles className="w-6 h-6 text-red-400" />
-                <h3 className="text-2xl font-bold text-white">Ready to Scale?</h3>
-                <Sparkles className="w-6 h-6 text-red-400" />
-              </div>
-              <p className="text-gray-300 mb-6">
-                Join hundreds of successful businesses that trust Rapid Flow Fulfillment
-                with their logistics operations.
-              </p>
-              <div className="flex justify-center items-center gap-4 text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span>24/7 Support</span>
+                  {/* Bottom section with enhanced styling */}
+                  {/* <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-xl rounded-2xl p-8 border border-red-400/30 text-center">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <Sparkles className="w-6 h-6 text-red-400" />
+                      <h3 className="text-2xl font-bold text-white">
+                        {item?.ready_scale_text}
+                      </h3>
+                      <Sparkles className="w-6 h-6 text-red-400" />
+                    </div>
+                    <p className="text-gray-300 mb-6">
+                      {item?.ready_scale_desc}
+                    </p>
+                    <div className="flex justify-center items-center gap-4 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span> {item?.support}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span>{item?.solutions}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span>{item?.team}</span>
+                      </div>
+                    </div>
+                  </div> */}
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span>Scalable Solutions</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span>Expert Team</span>
-                </div>
-              </div>
-            </div>
-          </div>
+              </>
+            ))}
 
           {/* Form */}
           <div id="quote-form" className="lg:col-span-2">
@@ -561,6 +606,21 @@ export default function Register() {
                           </SelectItem>
                         </SelectContent>
                       </Select>
+
+                      {/* Custom Input */}
+                      {formData.serviceType === "custom" && (
+                        <Input
+                          type="text"
+                          placeholder="Please describe your custom service"
+                          value={formData.customService}
+                          onChange={(e) =>
+                            handleInputChange("customService", e.target.value)
+                          }
+                          className="h-12 mt-3 border-2 border-gray-200 focus:border-red-400 focus:ring-0 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all hover:border-gray-300 focus:bg-white"
+                          required
+                          disabled={isSubmitting}
+                        />
+                      )}
                     </div>
 
                     {/* Budget */}

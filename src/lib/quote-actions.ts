@@ -13,6 +13,8 @@ const quoteFormSchema = z.object({
   website: z.string().optional(),
   serviceType: z.string().min(1, "Service type is required"),
   budget: z.string().min(1, "Budget range is required"),
+
+   customService: z.string()
 });
 
 export type QuoteFormData = z.infer<typeof quoteFormSchema>;
