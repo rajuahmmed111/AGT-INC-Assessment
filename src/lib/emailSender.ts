@@ -18,16 +18,12 @@ class CustomApiError extends Error implements ApiError {
 const emailSender = async (subject: string, email: string, html: string) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.office365.com",
-  port: 587,
-  secure: false,
-  auth: {
-    type: "OAuth2",
-    user: "ahraju2003@outlook.com",
-    clientId: "3ff99b34-8d4e-4593-a6d3-cc30bef2fb4f",
-    clientSecret: "7f04fd1e-bdd9-40b5-9e8c-dd57a19dd8ed",
-    refreshToken: "YOUR_REFRESH_TOKEN",
-    accessToken: "YOUR_ACCESS_TOKEN", // optional if refresh token is working
-  },
+    port: 587,
+    secure: false,
+    auth: {
+      user: "ahraju2003@outlook.com",
+      pass: "makejsjueoxclwqs",
+    },
   });
 
   const mailOptions = {
