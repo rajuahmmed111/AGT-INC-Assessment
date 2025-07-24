@@ -66,7 +66,7 @@ export default function Register() {
   // console.log(data?.data);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({
+    setFormData((prev:any) => ({
       ...prev,
       [field]: value,
     }));
