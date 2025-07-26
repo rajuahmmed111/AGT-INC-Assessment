@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Rapid Flow Fulfillment",
   },
   description:
-    "Flexible and affordable 3PL fulfillment for ecommerce, retail, and more. Contact Rapid Flow Fulfillment for tailored logistics solutions, real-time tracking, and top-tier service.",
+    "Rapid Flow Fulfillment is your all-in-one logistics partner, providing full-spectrum fulfillment solutions for businesses of every size—from startups to established enterprises. Whether you’re shipping your first order or scaling to thousands a day, we handle it all with precision and speed.",
   metadataBase: new URL("https://rapidflowfulfillment.com"),
   icons: {
     icon: [
