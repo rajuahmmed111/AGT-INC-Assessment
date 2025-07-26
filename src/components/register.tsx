@@ -53,20 +53,11 @@ export default function Register() {
     budget: "",
   });
 
-  const { isLoading, data, error, isSuccess } = useGetQuoteLeftQuery({});
+  const { isLoading, data, isSuccess } = useGetQuoteLeftQuery({});
 
   // send quote api
   const [sendQuote] = useSendQuoteMutation();
 
-  // if (isLoading) {
-  //   return <p> loading page .....</p>;
-  // }
-  // if (error) {
-  //   console.log(error);
-  // }
-
-  // console.log(isSuccess);
-  // console.log(data?.data);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev: any) => ({
