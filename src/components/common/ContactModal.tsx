@@ -85,7 +85,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Action buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=rapidflowfulfillment@gmail.com&su=Support&body=Hello"
+             href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact?.email}&su=Support&body=Hello`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 text-center shadow-lg hover:shadow-red-500/25 group"
