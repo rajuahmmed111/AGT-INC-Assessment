@@ -13,12 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   CheckCircle,
   Clock,
   ArrowRight,
-  Sparkles,
   Loader2,
   Handshake,
   ShoppingBagIcon,
@@ -26,24 +25,33 @@ import {
 import { TbBrandWalmart } from "react-icons/tb";
 import { MdOutlinePrivateConnectivity } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useSendQuoteMutation } from "@/redux/api/sendQuoteApi";
+import { useState } from "react";
+import Header from "./CardHeader";
 
-interface RightFormProps {
-  formData: any;
-  handleInputChange: (field: string, value: string) => void;
-  isSubmitting: boolean;
-  setIsSubmitting: (value: boolean) => void;
-  sendQuote: (data: any) => any;
-  setFormData: (data: any) => void;
-}
+export default function RightForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<any>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    website: "",
+    serviceType: "",
+    customService: "",
+    budget: "",
+  });
 
-export default function RightForm({
-  formData,
-  handleInputChange,
-  isSubmitting,
-  setIsSubmitting,
-  sendQuote,
-  setFormData,
-}: RightFormProps) {
+  const [sendQuote] = useSendQuoteMutation();
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -102,22 +110,10 @@ export default function RightForm({
     <div id="quote-form">
       <div className="sticky top-8">
         <Card className="bg-white/95 backdrop-blur-xl shadow-2xl border-0 overflow-hidden rounded-3xl">
-          <CardHeader className="pb-6 bg-gradient-to-r from-red-500 to-red-600 text-white relative">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-medium">Free Consultation</span>
-              </div>
-              <CardTitle className="text-2xl font-bold mb-2">
-                Get Your Free Quote
-              </CardTitle>
-              <p className="text-red-100 text-sm opacity-90">
-                Fill out the form below and we&apos;ll respond within 24 hours
-              </p>
-            </div>
-          </CardHeader>
+          {/* Header */}
+          <Header />
 
-          <CardContent className="p-8">
+          <CardContent className="p-5">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
