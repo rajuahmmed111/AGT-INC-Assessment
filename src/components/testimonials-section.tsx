@@ -34,6 +34,10 @@ export default function Testimonials() {
     new Set()
   );
 
+  // Add hover states for video controls
+  const [hoveredMainVideo, setHoveredMainVideo] = useState(false);
+  const [hoveredCardVideo, setHoveredCardVideo] = useState<number | null>(null);
+
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
   const cardVideoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
@@ -49,15 +53,15 @@ export default function Testimonials() {
   } = useGetTestimonialsQuery(undefined);
 
   // Process API data and add hasVideo flag
- const testimonials =
-  testimonialApiData?.data?.map((testimonial: any, index: any) => ({
-    id: index + 1,
-    text: testimonial.text,
-    name: testimonial.name,
-    rating: testimonial.rating,
-    videoUrl: testimonial.videoUrl?.replace(/^http:\/\//, "https://"), // ✅ fix here
-    hasVideo: !!testimonial.videoUrl,
-  })) || [];
+  const testimonials =
+    testimonialApiData?.data?.map((testimonial: any, index: any) => ({
+      id: index + 1,
+      text: testimonial.text,
+      name: testimonial.name,
+      rating: testimonial.rating,
+      videoUrl: testimonial.videoUrl?.replace(/^http:\/\//, "https://"), // ✅ fix here
+      hasVideo: !!testimonial.videoUrl,
+    })) || [];
   // Initialize muted states based on testimonials length
   useEffect(() => {
     if (testimonials.length > 0) {
@@ -173,7 +177,7 @@ export default function Testimonials() {
           await new Promise((resolve) => {
             const handleLoadedData = () => {
               video.removeEventListener("loadeddata", handleLoadedData);
-              resolve(void 0);
+              video.load();
             };
             video.addEventListener("loadeddata", handleLoadedData);
             video.load();
@@ -426,7 +430,11 @@ export default function Testimonials() {
               {/* Video Player */}
               <div className="relative">
                 {testimonials[currentSlide]?.hasVideo ? (
-                  <div className="relative w-full h-80 bg-black rounded-3xl overflow-hidden border border-white/10">
+                  <div
+                    className="relative w-full h-80 bg-black rounded-3xl overflow-hidden border border-white/10"
+                    onMouseEnter={() => setHoveredMainVideo(true)}
+                    onMouseLeave={() => setHoveredMainVideo(false)}
+                  >
                     <video
                       key={testimonials[currentSlide].id} // ✅ Force re-render on slide change
                       ref={(el) => {
@@ -445,32 +453,41 @@ export default function Testimonials() {
                       Your browser does not support the video tag.
                     </video>
 
-                    {/* Video Controls Overlay */}
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center group hover:bg-black/40 transition-all">
+                    {/* Video Controls Overlay - Show only when paused OR when hovering */}
+                    {(playingVideo !== testimonials[currentSlide].id ||
+                      hoveredMainVideo) && (
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all">
+                        <button
+                          onClick={() =>
+                            toggleVideo(testimonials[currentSlide].id)
+                          }
+                          className="w-20 h-20 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                        >
+                          {playingVideo === testimonials[currentSlide].id ? (
+                            <Pause className="w-8 h-8 text-white" />
+                          ) : (
+                            <Play className="w-8 h-8 text-white ml-1" />
+                          )}
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Mute Button - Always show when hovering */}
+                    {hoveredMainVideo && (
                       <button
                         onClick={() =>
-                          toggleVideo(testimonials[currentSlide].id)
+                          toggleMute(testimonials[currentSlide].id)
                         }
-                        className="w-20 h-20 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                        className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all"
                       >
-                        {playingVideo === testimonials[currentSlide].id ? (
-                          <Pause className="w-8 h-8 text-white" />
+                        {mutedVideos.has(testimonials[currentSlide].id) ? (
+                          <VolumeX className="w-5 h-5 text-white" />
                         ) : (
-                          <Play className="w-8 h-8 text-white ml-1" />
+                          <Volume2 className="w-5 h-5 text-white" />
                         )}
                       </button>
-                    </div>
-                    {/* Mute Button */}
-                    <button
-                      onClick={() => toggleMute(testimonials[currentSlide].id)}
-                      className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all"
-                    >
-                      {mutedVideos.has(testimonials[currentSlide].id) ? (
-                        <VolumeX className="w-5 h-5 text-white" />
-                      ) : (
-                        <Volume2 className="w-5 h-5 text-white" />
-                      )}
-                    </button>
+                    )}
+
                     {/* Video Badge */}
                     <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                       📹 Video Review
@@ -536,7 +553,11 @@ export default function Testimonials() {
               {/* Video Card or Regular Card */}
               {testimonial.hasVideo ? (
                 <div className="relative">
-                  <div className="h-48 bg-black rounded-t-2xl overflow-hidden relative">
+                  <div
+                    className="h-48 bg-black rounded-t-2xl overflow-hidden relative"
+                    onMouseEnter={() => setHoveredCardVideo(testimonial.id)}
+                    onMouseLeave={() => setHoveredCardVideo(null)}
+                  >
                     <video
                       ref={(el) => {
                         if (el) cardVideoRefs.current[testimonial.id] = el;
@@ -545,35 +566,42 @@ export default function Testimonials() {
                       muted={mutedCardVideos.has(testimonial.id)}
                       playsInline
                       preload="metadata"
-                      onClick={(e) => toggleCardVideo(testimonial.id, e)}
                     >
                       <source src={testimonial.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
-                    {/* Video Controls Overlay */}
-                    <div
-                      className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer hover:bg-black/60 transition-all"
-                      onClick={(e) => toggleCardVideo(testimonial.id, e)}
-                    >
-                      <div className="w-16 h-16 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center transition-all hover:scale-110">
-                        {playingCardVideo === testimonial.id ? (
-                          <Pause className="w-8 h-8 text-white" />
-                        ) : (
-                          <Play className="w-8 h-8 text-white ml-1" />
-                        )}
+
+                    {/* Video Controls Overlay - Show only when paused OR when hovering */}
+                    {(playingCardVideo !== testimonial.id ||
+                      hoveredCardVideo === testimonial.id) && (
+                      <div
+                        className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer hover:bg-black/60 transition-all"
+                        onClick={(e) => toggleCardVideo(testimonial.id, e)}
+                      >
+                        <div className="w-16 h-16 bg-red-500/80 hover:bg-red-500 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                          {playingCardVideo === testimonial.id ? (
+                            <Pause className="w-8 h-8 text-white" />
+                          ) : (
+                            <Play className="w-8 h-8 text-white ml-1" />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    {/* Mute Button for Card Video */}
-                    <button
-                      onClick={(e) => toggleCardMute(testimonial.id, e)}
-                      className="absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all z-10"
-                    >
-                      {mutedCardVideos.has(testimonial.id) ? (
-                        <VolumeX className="w-4 h-4 text-white" />
-                      ) : (
-                        <Volume2 className="w-4 h-4 text-white" />
-                      )}
-                    </button>
+                    )}
+
+                    {/* Mute Button for Card Video - Show only when hovering */}
+                    {hoveredCardVideo === testimonial.id && (
+                      <button
+                        onClick={(e) => toggleCardMute(testimonial.id, e)}
+                        className="absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all z-10"
+                      >
+                        {mutedCardVideos.has(testimonial.id) ? (
+                          <VolumeX className="w-4 h-4 text-white" />
+                        ) : (
+                          <Volume2 className="w-4 h-4 text-white" />
+                        )}
+                      </button>
+                    )}
+
                     {/* Video Badge */}
                     <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
                       📹 Video
