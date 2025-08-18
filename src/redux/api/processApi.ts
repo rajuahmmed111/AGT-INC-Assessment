@@ -8,7 +8,7 @@ const processApi = baseApi.injectEndpoints({
         url: "our-process",
         method: "GET",
       }),
-      // providesTags: ["Processes"],
+      providesTags: ["Processes"],
     }),
   }),
 });

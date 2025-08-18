@@ -17,6 +17,7 @@ const faqApi = baseApi.injectEndpoints({
         url: `faqs`,
         method: "GET",
       }),
+      providesTags: ["Faqs"],
     }),
   }),
 });

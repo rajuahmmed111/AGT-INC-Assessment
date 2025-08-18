@@ -7,7 +7,7 @@ const quoteLeftApi = baseApi.injectEndpoints({
         url: "quote-form-left",
         method: "GET",
       }),
-      // providesTags: ["QuoteFormLeft"],
+      providesTags: ["QuoteFormLeft"],
     }),
   }),
   // overrideExisting: false,

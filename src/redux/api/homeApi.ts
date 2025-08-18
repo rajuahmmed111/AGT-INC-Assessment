@@ -8,7 +8,7 @@ const homeApi = baseApi.injectEndpoints({
         url: "homes",
         method: "GET",
       }),
-      // providesTags: ["Homes"],
+      providesTags: ["Homes"],
     }),
   }),
 });

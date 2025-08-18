@@ -20,6 +20,7 @@ const testimonialApi = baseApi.injectEndpoints({
         url: `testimonials/title`,
         method: "GET",
       }),
+      providesTags: ["Testimonials"],
     }),
 
     // get all testimonials
@@ -28,7 +29,7 @@ const testimonialApi = baseApi.injectEndpoints({
         url: `testimonials`,
         method: "GET",
       }),
-      // providesTags: ["Testimonials"],
+      providesTags: ["Testimonials"],
     }),
   }),
 });

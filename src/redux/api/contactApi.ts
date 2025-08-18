@@ -9,10 +9,9 @@ const contactApi = baseApi.injectEndpoints({
         url: `contact`,
         method: "GET",
       }),
-      // providesTags: ["Contact"],
+      providesTags: ["Contact"],
     }),
   }),
 });
 
-/*******  b7907498-7025-4ecd-ab43-874a8eab2e9e  *******/
 export const { useGetContactQuery } = contactApi;

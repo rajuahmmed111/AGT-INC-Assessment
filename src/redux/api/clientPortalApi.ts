@@ -8,7 +8,7 @@ const clientPortalApi = baseApi.injectEndpoints({
         url: "client-portal",
         method: "GET",
       }),
-      // providesTags: ["ClientPortal"],
+      providesTags: ["ClientPortal"],
     }),
   }),
   overrideExisting: true,

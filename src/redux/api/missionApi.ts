@@ -8,7 +8,7 @@ const missionApi = baseApi.injectEndpoints({
         url: "missions",
         method: "GET",
       }),
-      // providesTags: ["Missions"],
+      providesTags: ["Missions"],
     }),
   }),
 });

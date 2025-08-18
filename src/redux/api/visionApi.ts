@@ -8,7 +8,7 @@ const visionApi = baseApi.injectEndpoints({
         url: "visions",
         method: "GET",
       }),
-      // providesTags: ["Visions"],
+      providesTags: ["Visions"],
     }),
   }),
 });

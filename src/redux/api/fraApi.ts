@@ -8,7 +8,7 @@ const fraApi = baseApi.injectEndpoints({
         url: "fras",
         method: "GET",
       }),
-      // providesTags: ["Fras"],
+      providesTags: ["Fras"],
     }),
   }),
 });
