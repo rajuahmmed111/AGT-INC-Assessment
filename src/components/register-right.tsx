@@ -29,6 +29,13 @@ import { useSendQuoteMutation } from "@/redux/api/sendQuoteApi";
 import { useState } from "react";
 import Header from "./CardHeader";
 
+// --- Helpers ---
+const isValidComEmail = (email: string) => {
+  // Enforce .com at the end
+  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/i;
+  return re.test(email.trim());
+};
+
 export default function RightForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<any>({
@@ -36,6 +43,7 @@ export default function RightForm() {
     budget: "",
     customService: "",
     website: "",
+    email: "",
   });
   const [formData, setFormData] = useState<any>({
     firstName: "",
@@ -52,6 +60,16 @@ export default function RightForm() {
   // redux api
   const [sendQuote] = useSendQuoteMutation();
 
+  const isValidPhoneInput = (phone: string) => {
+  const phonePattern = /^[\+0-9\-\s]*$/;
+  return phonePattern.test(phone);
+};
+
+const isValidPhoneFormat = (phone: string) => {
+  const re = /^\+?[0-9]{1,4}[0-9\-\s]{7,15}$/;
+  return re.test(phone.trim());
+};
+
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev: any) => ({
       ...prev,
@@ -66,11 +84,10 @@ export default function RightForm() {
       }));
     }
 
+    // live validation for specific fields
     if (field === "website" && value.trim()) {
-      const urlPattern =
-        /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+      const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
       const isValidUrl = urlPattern.test(value.trim());
-
       if (!isValidUrl) {
         setErrors((prev: any) => ({
           ...prev,
@@ -78,11 +95,56 @@ export default function RightForm() {
         }));
       }
     }
+
+    if (field === "email") {
+      if (!isValidComEmail(value)) {
+        setErrors((prev: any) => ({
+          ...prev,
+          email: "Enter valid email",
+        }));
+      }
+    }
+
+   if (field === "phone") {
+
+    if (value && !isValidPhoneInput(value)) {
+      setErrors((prev: any) => ({
+        ...prev,
+        phone: "Only numbers, +, and - are allowed",
+      }));
+    } 
+
+    else if (value && !isValidPhoneFormat(value)) {
+      setErrors((prev: any) => ({
+        ...prev,
+        phone: "Enter your phone number (+8801234567890)",
+      }));
+    }
+  }
   };
 
   const validateForm = () => {
     const newErrors: any = {};
     let hasErrors = false;
+
+    // Validate Email (.com only)
+    if (!formData.email || !isValidComEmail(formData.email)) {
+      newErrors.email = "Enter valid email";
+      hasErrors = true;
+    }
+
+    // validate phone
+   if (!formData.phone) {
+    newErrors.phone = "Enter your phone number";
+    hasErrors = true;
+  } 
+  else if (!isValidPhoneInput(formData.phone)) {
+    newErrors.phone = "Only numbers, +, and - are allowed";
+    hasErrors = true;
+  } else if (!isValidPhoneFormat(formData.phone)) {
+    newErrors.phone = "Enter your phone number (+8801234567890)";
+    hasErrors = true;
+  }
 
     // Validate Service Type
     if (!formData.serviceType) {
@@ -98,8 +160,7 @@ export default function RightForm() {
 
     // Validate Custom Service
     if (formData.serviceType === "custom" && !formData.customService.trim()) {
-      newErrors.customService =
-        "Please describe your custom service requirements";
+      newErrors.customService = "Please describe your custom service requirements";
       hasErrors = true;
     }
 
@@ -110,7 +171,7 @@ export default function RightForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate form
+    // JS validation first (don’t rely only on HTML5)
     if (!validateForm()) {
       return;
     }
@@ -180,37 +241,27 @@ export default function RightForm() {
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="firstName"
-                    className="text-gray-700 font-medium text-sm"
-                  >
+                  <Label htmlFor="firstName" className="text-gray-700 font-medium text-sm">
                     First Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="firstName"
                     placeholder="John"
                     value={formData.firstName}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("firstName", e.target.value)}
                     required
                     className="h-12  border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="lastName"
-                    className="text-gray-700 font-medium text-sm"
-                  >
+                  <Label htmlFor="lastName" className="text-gray-700 font-medium text-sm">
                     Last Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="lastName"
                     placeholder="Doe"
                     value={formData.lastName}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("lastName", e.target.value)}
                     required
                     disabled={isSubmitting}
                     className="h-12 border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white"
@@ -221,28 +272,36 @@ export default function RightForm() {
               {/* Contact Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="email"
-                    className="text-gray-700 font-medium text-sm"
-                  >
+                  <Label htmlFor="email" className="text-gray-700 font-medium text-sm">
                     Email Address <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="email"
-                    type="email"
+                    type="email" // keep native checks
                     placeholder="john@company.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     required
                     disabled={isSubmitting}
-                    className="h-12 border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$" // enforce .com
+                    onInvalid={(e) =>
+                      (e.target as HTMLInputElement).setCustomValidity(
+                        "Enter a valid email address"
+                      )
+                    }
+                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    className={`h-12 border ${errors.email ? "border-red-500" : "border-gray-200"} bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white`}
                   />
+                  {errors.email && (
+                    <p id="email-error" className="text-red-500 text-sm mt-1">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="phone"
-                    className="text-gray-700 font-medium text-sm"
-                  >
+                  <Label htmlFor="phone" className="text-gray-700 font-medium text-sm">
                     Phone Number <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -258,194 +317,127 @@ export default function RightForm() {
                         "Please enter a valid number"
                       )
                     }
-                    onInput={(e) =>
-                      (e.target as HTMLInputElement).setCustomValidity("")
-                    }
+                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
                     disabled={isSubmitting}
-                    className="h-12 border-gray-200  
-     bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl 
-     transition-all focus:bg-white"
+                    className="h-12 border-gray-200  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl  transition-all focus:bg-white"
                   />
+                   {errors.phone && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.phone}
+    </p>
+  )}
                 </div>
               </div>
 
               {/* Company Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="company"
-                    className="text-gray-700 font-medium text-sm"
-                  >
+                  <Label htmlFor="company" className="text-gray-700 font-medium text-sm">
                     Company Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="company"
                     placeholder="Your Company Inc."
                     value={formData.company}
-                    onChange={(e) =>
-                      handleInputChange("company", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("company", e.target.value)}
                     required
                     disabled={isSubmitting}
                     className="h-12 border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label
-                    htmlFor="website"
-                    className="text-gray-700 font-medium text-sm"
-                  >
-                    Website{" "}
-                    <span className="text-gray-400 text-xs">(Optional)</span>
+                  <Label htmlFor="website" className="text-gray-700 font-medium text-sm">
+                    Website <span className="text-gray-400 text-xs">(Optional)</span>
                   </Label>
                   <Input
                     id="website"
                     placeholder="www.yourcompany.com"
                     value={formData.website}
-                    onChange={(e) =>
-                      handleInputChange("website", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("website", e.target.value)}
                     disabled={isSubmitting}
-                    className={`h-12 ${
-                      errors.website ? "border-gray-200" : "border-gray-200"
-                    }  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white`}
+                    className={`h-12 ${errors.website ? "border-gray-200" : "border-gray-200"}  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white`}
                   />
                   {errors.website && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.website}
-                    </p>
+                    <p className="text-red-500 text-sm mt-1">{errors.website}</p>
                   )}
                 </div>
               </div>
 
               {/* Service Type */}
               <div className="space-y-2">
-                <Label
-                  htmlFor="serviceType"
-                  className="text-gray-700 font-medium text-sm"
-                >
-                  What service do you need?{" "}
-                  <span className="text-red-500">*</span>
+                <Label htmlFor="serviceType" className="text-gray-700 font-medium text-sm">
+                  What service do you need? <span className="text-red-500">*</span>
                 </Label>
                 <Select
                   value={formData.serviceType}
-                  onValueChange={(value) =>
-                    handleInputChange("serviceType", value)
-                  }
+                  onValueChange={(value) => handleInputChange("serviceType", value)}
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger
-                    className={`h-12 ${
-                      errors.serviceType ? "border-gray-200" : "border-gray-200"
-                    } bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}
-                  >
+                  <SelectTrigger className={`h-12 ${errors.serviceType ? "border-gray-200" : "border-gray-200"} bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}>
                     <SelectValue placeholder="Select the service you need" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-gray-200 shadow-xl rounded-xl">
-                    <SelectItem
-                      value="amazon"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="amazon" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <FaAmazon />
                         <div>Amazon</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="bigcommerce"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="bigcommerce" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <SiBigcommerce />
                         <div>BigCommerce</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="magento"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="magento" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <FaMagento />
                         <div>Magento</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="shopify"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="shopify" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <FaShopify />
                         <div>Shopify</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="tiktok"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="tiktok" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <FaTiktok />
                         <div>TikTok</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="walmart"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="walmart" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <TbBrandWalmart />
                         <div>Walmart</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="private-label"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="private-label" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <MdOutlinePrivateConnectivity />
                         <div>Private Label</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="retail"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="retail" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <ShoppingBagIcon className="w-4 h-4" />
                         <div>Retail</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="woocommerce"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="woocommerce" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <div className="font-bold text-gray-600 text-lg">w</div>
                         <div>WooCommerce</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="ebay"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="ebay" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <div className="font-bold text-gray-600 text-lg">e</div>
                         <div>eBay</div>
                       </div>
                     </SelectItem>
-
-                    <SelectItem
-                      value="custom"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="custom" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       <div className="flex items-center gap-2">
                         <MdBolt className="w-4 h-4" />
                         <div>Custom Solution (Others)</div>
@@ -454,14 +446,10 @@ export default function RightForm() {
                   </SelectContent>
                 </Select>
 
-                {/* Error message for service type */}
                 {errors.serviceType && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.serviceType}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.serviceType}</p>
                 )}
 
-                {/* Custom Input */}
                 {formData.serviceType === "custom" && (
                   <Input
                     name="customService"
@@ -472,9 +460,7 @@ export default function RightForm() {
                       handleInputChange("customService", e.target.value);
                     }}
                     className={`h-12 mt-3 border-2 ${
-                      errors.customService
-                        ? "border-red-500"
-                        : "border-gray-200"
+                      errors.customService ? "border-red-500" : "border-gray-200"
                     } focus:border-red-400 focus:ring-0 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all hover:border-gray-300 focus:bg-white`}
                     required
                     disabled={isSubmitting}
@@ -482,18 +468,13 @@ export default function RightForm() {
                 )}
 
                 {errors.customService && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.customService}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{errors.customService}</p>
                 )}
               </div>
 
               {/* Budget */}
               <div className="space-y-2">
-                <Label
-                  htmlFor="budget"
-                  className="text-gray-700 font-medium text-sm"
-                >
+                <Label htmlFor="budget" className="text-gray-700 font-medium text-sm">
                   Monthly Order Volume <span className="text-red-500">*</span>
                 </Label>
                 <Select
@@ -501,48 +482,28 @@ export default function RightForm() {
                   onValueChange={(value) => handleInputChange("budget", value)}
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger
-                    className={`h-12 ${
-                      errors.budget ? "border-gray-200" : "border-gray-200"
-                    } bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}
-                  >
+                  <SelectTrigger className={`h-12 ${errors.budget ? "border-gray-200" : "border-gray-200"} bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}>
                     <SelectValue placeholder="How many orders do you process monthly?" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-gray-200 shadow-xl rounded-xl">
-                    <SelectItem
-                      value="500"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="500" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       1- 500 orders
                     </SelectItem>
-                    <SelectItem
-                      value="500-1000"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="500-1000" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       500 - 1,000 orders
                     </SelectItem>
-                    <SelectItem
-                      value="1001-5000"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="1001-5000" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       1,001 - 5,000 orders
                     </SelectItem>
-                    <SelectItem
-                      value="5001-10k"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="5001-10k" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       5,001 - 10,000 orders
                     </SelectItem>
-                    <SelectItem
-                      value="10k+"
-                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
-                    >
+                    <SelectItem value="10k+" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
                       10,000+ orders
                     </SelectItem>
                   </SelectContent>
                 </Select>
 
-                {/* Error message for budget */}
                 {errors.budget && (
                   <p className="text-red-500 text-sm mt-1">{errors.budget}</p>
                 )}
