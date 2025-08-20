@@ -4,9 +4,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import ContactModal from "@/components/common/ContactModal";
+import { useGetCtaQuery } from "@/redux/api/ctaApi";
 
 export default function CtaSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // RTK Query
+  const { data: ctaData } = useGetCtaQuery({});
+  const cta = ctaData?.data?.[0];
+
+  const fullTitle = cta?.title || "Ready to Scale Up?";
+  const words = fullTitle.split(" ");
+  const lastTwo = words.slice(words.length - 2).join(" ");
+  const firstPart = words.slice(0, words.length - 2).join(" ");
 
   return (
     <section className="bg-gradient-to-br from-black via-gray-900 to-black py-14 px-6 relative overflow-hidden">
@@ -18,15 +28,14 @@ export default function CtaSection() {
         {/* Main Content */}
         <div className="mb-12">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Ready to{" "}
+            {firstPart}{" "}
             <span className="text-transparent bg-gradient-to-r from-red-500 to-red-600 bg-clip-text">
-              Scale Up?
+              {lastTwo}
             </span>
           </h2>
 
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Join hundreds of successful businesses who trust us for their
-            business growth
+            {cta?.description || "Description"}
           </p>
         </div>
 

@@ -31,5 +31,6 @@ export const baseApi = createApi({
     "Testimonials",
     "Contact",
     "ClientPortal",
+    "Cta",
   ],
 });
