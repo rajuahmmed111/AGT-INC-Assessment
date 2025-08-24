@@ -61,14 +61,14 @@ export default function RightForm() {
   const [sendQuote] = useSendQuoteMutation();
 
   const isValidPhoneInput = (phone: string) => {
-  const phonePattern = /^[\+0-9\-\s]*$/;
-  return phonePattern.test(phone);
-};
+    const phonePattern = /^[0-9+\-\s()]*$/;
+    return phonePattern.test(phone.trim());
+  };
 
-const isValidPhoneFormat = (phone: string) => {
-  const re = /^\+?[0-9]{1,4}[0-9\-\s]{7,15}$/;
-  return re.test(phone.trim());
-};
+  const isValidPhoneFormat = (phone: string) => {
+    const digits = phone.replace(/\D/g, "");
+    return digits.length >= 7 && digits.length <= 20;
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev: any) => ({
@@ -86,7 +86,8 @@ const isValidPhoneFormat = (phone: string) => {
 
     // live validation for specific fields
     if (field === "website" && value.trim()) {
-      const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+      const urlPattern =
+        /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
       const isValidUrl = urlPattern.test(value.trim());
       if (!isValidUrl) {
         setErrors((prev: any) => ({
@@ -105,22 +106,25 @@ const isValidPhoneFormat = (phone: string) => {
       }
     }
 
-   if (field === "phone") {
-
-    if (value && !isValidPhoneInput(value)) {
-      setErrors((prev: any) => ({
-        ...prev,
-        phone: "Only numbers, +, and - are allowed",
-      }));
-    } 
-
-    else if (value && !isValidPhoneFormat(value)) {
-      setErrors((prev: any) => ({
-        ...prev,
-        phone: "Enter your phone number (+8801234567890)",
-      }));
+    if (field === "phone") {
+      if (value && !isValidPhoneInput(value)) {
+        setErrors((prev: any) => ({
+          ...prev,
+          phone: "Only numbers, +, -, (), and spaces are allowed",
+        }));
+      } else if (value && !isValidPhoneFormat(value)) {
+        setErrors((prev: any) => ({
+          ...prev,
+          phone: "Enter a valid phone number",
+        }));
+      } else {
+        // Clear error if valid
+        setErrors((prev: any) => ({
+          ...prev,
+          phone: "",
+        }));
+      }
     }
-  }
   };
 
   const validateForm = () => {
@@ -134,17 +138,16 @@ const isValidPhoneFormat = (phone: string) => {
     }
 
     // validate phone
-   if (!formData.phone) {
-    newErrors.phone = "Enter your phone number";
-    hasErrors = true;
-  } 
-  else if (!isValidPhoneInput(formData.phone)) {
-    newErrors.phone = "Only numbers, +, and - are allowed";
-    hasErrors = true;
-  } else if (!isValidPhoneFormat(formData.phone)) {
-    newErrors.phone = "Enter your phone number (+8801234567890)";
-    hasErrors = true;
-  }
+    if (!formData.phone) {
+      newErrors.phone = "Enter your phone number";
+      hasErrors = true;
+    } else if (!isValidPhoneInput(formData.phone)) {
+      newErrors.phone = "Only numbers, +, -, (), and spaces are allowed";
+      hasErrors = true;
+    } else if (!isValidPhoneFormat(formData.phone)) {
+      newErrors.phone = "Enter a valid phone number";
+      hasErrors = true;
+    }
 
     // Validate Service Type
     if (!formData.serviceType) {
@@ -160,7 +163,8 @@ const isValidPhoneFormat = (phone: string) => {
 
     // Validate Custom Service
     if (formData.serviceType === "custom" && !formData.customService.trim()) {
-      newErrors.customService = "Please describe your custom service requirements";
+      newErrors.customService =
+        "Please describe your custom service requirements";
       hasErrors = true;
     }
 
@@ -241,27 +245,37 @@ const isValidPhoneFormat = (phone: string) => {
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-gray-700 font-medium text-sm">
+                  <Label
+                    htmlFor="firstName"
+                    className="text-gray-700 font-medium text-sm"
+                  >
                     First Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="firstName"
                     placeholder="John"
                     value={formData.firstName}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("firstName", e.target.value)
+                    }
                     required
                     className="h-12  border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-gray-700 font-medium text-sm">
+                  <Label
+                    htmlFor="lastName"
+                    className="text-gray-700 font-medium text-sm"
+                  >
                     Last Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="lastName"
                     placeholder="Doe"
                     value={formData.lastName}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("lastName", e.target.value)
+                    }
                     required
                     disabled={isSubmitting}
                     className="h-12 border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white"
@@ -272,7 +286,10 @@ const isValidPhoneFormat = (phone: string) => {
               {/* Contact Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-700 font-medium text-sm">
+                  <Label
+                    htmlFor="email"
+                    className="text-gray-700 font-medium text-sm"
+                  >
                     Email Address <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -289,10 +306,14 @@ const isValidPhoneFormat = (phone: string) => {
                         "Enter a valid email address"
                       )
                     }
-                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                    onInput={(e) =>
+                      (e.target as HTMLInputElement).setCustomValidity("")
+                    }
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "email-error" : undefined}
-                    className={`h-12 border ${errors.email ? "border-red-500" : "border-gray-200"} bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white`}
+                    className={`h-12 border ${
+                      errors.email ? "border-red-500" : "border-gray-200"
+                    } bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white`}
                   />
                   {errors.email && (
                     <p id="email-error" className="text-red-500 text-sm mt-1">
@@ -301,7 +322,10 @@ const isValidPhoneFormat = (phone: string) => {
                   )}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-gray-700 font-medium text-sm">
+                  <Label
+                    htmlFor="phone"
+                    className="text-gray-700 font-medium text-sm"
+                  >
                     Phone Number <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -317,127 +341,185 @@ const isValidPhoneFormat = (phone: string) => {
                         "Please enter a valid number"
                       )
                     }
-                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                    onInput={(e) =>
+                      (e.target as HTMLInputElement).setCustomValidity("")
+                    }
                     disabled={isSubmitting}
                     className="h-12 border-gray-200  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl  transition-all focus:bg-white"
                   />
-                   {errors.phone && (
-    <p className="text-red-500 text-sm mt-1">
-      {errors.phone}
-    </p>
-  )}
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
                 </div>
               </div>
 
               {/* Company Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="company" className="text-gray-700 font-medium text-sm">
+                  <Label
+                    htmlFor="company"
+                    className="text-gray-700 font-medium text-sm"
+                  >
                     Company Name <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="company"
                     placeholder="Your Company Inc."
                     value={formData.company}
-                    onChange={(e) => handleInputChange("company", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("company", e.target.value)
+                    }
                     required
                     disabled={isSubmitting}
                     className="h-12 border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all focus:bg-white"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="website" className="text-gray-700 font-medium text-sm">
-                    Website <span className="text-gray-400 text-xs">(Optional)</span>
+                  <Label
+                    htmlFor="website"
+                    className="text-gray-700 font-medium text-sm"
+                  >
+                    Website{" "}
+                    <span className="text-gray-400 text-xs">(Optional)</span>
                   </Label>
                   <Input
                     id="website"
                     placeholder="www.yourcompany.com"
                     value={formData.website}
-                    onChange={(e) => handleInputChange("website", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("website", e.target.value)
+                    }
                     disabled={isSubmitting}
-                    className={`h-12 ${errors.website ? "border-gray-200" : "border-gray-200"}  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white`}
+                    className={`h-12 ${
+                      errors.website ? "border-gray-200" : "border-gray-200"
+                    }  bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all  focus:bg-white`}
                   />
                   {errors.website && (
-                    <p className="text-red-500 text-sm mt-1">{errors.website}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.website}
+                    </p>
                   )}
                 </div>
               </div>
 
               {/* Service Type */}
               <div className="space-y-2">
-                <Label htmlFor="serviceType" className="text-gray-700 font-medium text-sm">
-                  What service do you need? <span className="text-red-500">*</span>
+                <Label
+                  htmlFor="serviceType"
+                  className="text-gray-700 font-medium text-sm"
+                >
+                  What service do you need?{" "}
+                  <span className="text-red-500">*</span>
                 </Label>
                 <Select
                   value={formData.serviceType}
-                  onValueChange={(value) => handleInputChange("serviceType", value)}
+                  onValueChange={(value) =>
+                    handleInputChange("serviceType", value)
+                  }
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger className={`h-12 ${errors.serviceType ? "border-gray-200" : "border-gray-200"} bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}>
+                  <SelectTrigger
+                    className={`h-12 ${
+                      errors.serviceType ? "border-gray-200" : "border-gray-200"
+                    } bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}
+                  >
                     <SelectValue placeholder="Select the service you need" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-gray-200 shadow-xl rounded-xl">
-                    <SelectItem value="amazon" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="amazon"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <FaAmazon />
                         <div>Amazon</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="bigcommerce" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="bigcommerce"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <SiBigcommerce />
                         <div>BigCommerce</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="magento" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="magento"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <FaMagento />
                         <div>Magento</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="shopify" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="shopify"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <FaShopify />
                         <div>Shopify</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="tiktok" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="tiktok"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <FaTiktok />
                         <div>TikTok</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="walmart" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="walmart"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <TbBrandWalmart />
                         <div>Walmart</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="private-label" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="private-label"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <MdOutlinePrivateConnectivity />
                         <div>Private Label</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="retail" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="retail"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <ShoppingBagIcon className="w-4 h-4" />
                         <div>Retail</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="woocommerce" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="woocommerce"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <div className="font-bold text-gray-600 text-lg">w</div>
                         <div>WooCommerce</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="ebay" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="ebay"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <div className="font-bold text-gray-600 text-lg">e</div>
                         <div>eBay</div>
                       </div>
                     </SelectItem>
-                    <SelectItem value="custom" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="custom"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       <div className="flex items-center gap-2">
                         <MdBolt className="w-4 h-4" />
                         <div>Custom Solution (Others)</div>
@@ -447,7 +529,9 @@ const isValidPhoneFormat = (phone: string) => {
                 </Select>
 
                 {errors.serviceType && (
-                  <p className="text-red-500 text-sm mt-1">{errors.serviceType}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.serviceType}
+                  </p>
                 )}
 
                 {formData.serviceType === "custom" && (
@@ -460,7 +544,9 @@ const isValidPhoneFormat = (phone: string) => {
                       handleInputChange("customService", e.target.value);
                     }}
                     className={`h-12 mt-3 border-2 ${
-                      errors.customService ? "border-red-500" : "border-gray-200"
+                      errors.customService
+                        ? "border-red-500"
+                        : "border-gray-200"
                     } focus:border-red-400 focus:ring-0 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-xl transition-all hover:border-gray-300 focus:bg-white`}
                     required
                     disabled={isSubmitting}
@@ -468,13 +554,18 @@ const isValidPhoneFormat = (phone: string) => {
                 )}
 
                 {errors.customService && (
-                  <p className="text-red-500 text-sm mt-1">{errors.customService}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.customService}
+                  </p>
                 )}
               </div>
 
               {/* Budget */}
               <div className="space-y-2">
-                <Label htmlFor="budget" className="text-gray-700 font-medium text-sm">
+                <Label
+                  htmlFor="budget"
+                  className="text-gray-700 font-medium text-sm"
+                >
                   Monthly Order Volume <span className="text-red-500">*</span>
                 </Label>
                 <Select
@@ -482,23 +573,42 @@ const isValidPhoneFormat = (phone: string) => {
                   onValueChange={(value) => handleInputChange("budget", value)}
                   disabled={isSubmitting}
                 >
-                  <SelectTrigger className={`h-12 ${errors.budget ? "border-gray-200" : "border-gray-200"} bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}>
+                  <SelectTrigger
+                    className={`h-12 ${
+                      errors.budget ? "border-gray-200" : "border-gray-200"
+                    } bg-gray-50 text-gray-900 rounded-xl transition-all focus:bg-white`}
+                  >
                     <SelectValue placeholder="How many orders do you process monthly?" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-gray-200 shadow-xl rounded-xl">
-                    <SelectItem value="500" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="500"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       1- 500 orders
                     </SelectItem>
-                    <SelectItem value="500-1000" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="500-1000"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       500 - 1,000 orders
                     </SelectItem>
-                    <SelectItem value="1001-5000" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="1001-5000"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       1,001 - 5,000 orders
                     </SelectItem>
-                    <SelectItem value="5001-10k" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="5001-10k"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       5,001 - 10,000 orders
                     </SelectItem>
-                    <SelectItem value="10k+" className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3">
+                    <SelectItem
+                      value="10k+"
+                      className="hover:bg-red-50 focus:bg-red-50 text-gray-900 rounded-lg py-3"
+                    >
                       10,000+ orders
                     </SelectItem>
                   </SelectContent>
