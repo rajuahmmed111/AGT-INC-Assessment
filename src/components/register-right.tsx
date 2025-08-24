@@ -331,7 +331,7 @@ export default function RightForm() {
                   <Input
                     id="phone"
                     type="tel"
-                    placeholder="+8801994-658709"
+                    placeholder="+1 (555) 123-4567"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
                     required
