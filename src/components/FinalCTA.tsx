@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, Mail, Phone } from "lucide-react";
 
 export default function FinalCTA() {

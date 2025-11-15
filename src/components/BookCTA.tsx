@@ -1,3 +1,5 @@
+"use client";
+
 import { Calendar } from "lucide-react";
 
 export default function BookingCTA() {
