@@ -41,7 +41,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Optional extra meta tags */}
         <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#ffffff" />
