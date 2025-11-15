@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
 
+// setup store
 const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
