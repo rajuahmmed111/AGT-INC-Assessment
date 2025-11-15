@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ClientProviders from "@/shared/ClientProviders";
 
 // custom local fonts
 const geistSans = localFont({
@@ -19,11 +18,11 @@ const geistMono = localFont({
 // global metadata for the site
 export const metadata: Metadata = {
   title: {
-    default: "Rapid Flow Fulfillment",
-    template: "%s | Rapid Flow Fulfillment",
+    default: "Next Frontend Template",
+    template: "%s | ",
   },
   description:
-    "Rapid Flow Fulfillment is your all-in-one logistics partner, providing full-spectrum fulfillment solutions for businesses of every size—from startups to established enterprises. Whether you’re shipping your first order or scaling to thousands a day, we handle it all with precision and speed.",
+    " is your all-in-one logistics partner, providing full-spectrum fulfillment solutions for businesses of every size—from startups to established enterprises. Whether you’re shipping your first order or scaling to thousands a day, we handle it all with precision and speed.",
   metadataBase: new URL("https://rapidflowfulfillment.com"),
   icons: {
     icon: [
@@ -48,7 +47,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ClientProviders>{children}</ClientProviders>
+        {children}
       </body>
     </html>
   );
