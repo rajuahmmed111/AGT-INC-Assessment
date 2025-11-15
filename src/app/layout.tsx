@@ -18,7 +18,7 @@ const geistMono = localFont({
 // global metadata for the site
 export const metadata: Metadata = {
   title: {
-    default: "Next Frontend Template",
+    default: "AGT INC Assessment",
     template: "%s | ",
   },
   description:
