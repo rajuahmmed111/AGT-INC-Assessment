@@ -5,9 +5,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 ```bash
-1. git clone https://github.com/rajuahmmed111/matthew-frontend
+1. git clone https://github.com/rajuahmmed111/AGT-INC-Assessment.git
 
-2. cd matthew-frontend
+2. cd AGT-INC-Assessment
 
 3. npm install
 
